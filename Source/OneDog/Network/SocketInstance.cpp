@@ -9,8 +9,8 @@ void SocketInstance::Connect()
 {
 	bIsRunning = true;
 	FIPv4Address IPAddress;
-	FIPv4Address::Parse(TEXT("127.0.0.1"), IPAddress); // 服务端 IP 地址
-	FIPv4Endpoint Endpoint(IPAddress, 8080); // 服务端端口号
+	FIPv4Address::Parse(TEXT("192.168.56.1"), IPAddress); // 服务端 IP 地址
+	FIPv4Endpoint Endpoint(IPAddress, 9996); // 服务端端口号
 	ClientSocket = FTcpSocketBuilder(TEXT("TCPClient"))
 		.AsReusable()
 		.BoundToEndpoint(Endpoint);

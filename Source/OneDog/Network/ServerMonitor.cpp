@@ -10,7 +10,6 @@ void ServerMonitor::StartServer()
 	FIPv4Address IPAddress;
 	FIPv4Address::Parse(TEXT("0.0.0.0"), IPAddress); // 监听所有网络接口
 	FIPv4Endpoint Endpoint(IPAddress, 9996); // 监听端口 9996
-	
 	ServerSocket = FTcpSocketBuilder(TEXT("TCPServer"))
 		.AsReusable()
 		.BoundToEndpoint(Endpoint)
@@ -21,6 +20,22 @@ void ServerMonitor::StartServer()
 		stateCB(0, "");
 		bIsRunning = true;
 		UE_LOG(LogTemp, Log, TEXT("Server is listening on port 9996..."));
+
+
+		// TArray<TSharedPtr<FInternetAddr>> LocalAddresses;
+		// if (FPlatformMisc::GetLocalNetworkAddresses(LocalAddresses))
+		// {
+		// 	for (const TSharedPtr<FInternetAddr>& Address : LocalAddresses)
+		// 	{
+		// 		FString IPAddress = Address->ToString(false); // false 表示不包含端口
+		// 		UE_LOG(LogTemp, Log, TEXT("Local IP Address: %s"), *IPAddress);
+		// 	}
+		// }
+		// else
+		// {
+		// 	UE_LOG(LogTemp, Error, TEXT("Failed to get local network addresses!"));
+		// }
+
 		// 在后台线程中处理客户端连接
 		Async(EAsyncExecution::Thread, [this]() { HandleClientConnection(); });
 	}
@@ -53,13 +68,17 @@ void ServerMonitor::EndServer()
 
 void ServerMonitor::HandleClientConnection()
 {
+	UE_LOG(LogTemp, Log, TEXT("11111111111111111111111111"));
 	while (bIsRunning)
 	{
+		UE_LOG(LogTemp, Log, TEXT("222222222222222222222"));
 		if (ServerSocket->Wait(ESocketWaitConditions::WaitForRead, FTimespan::FromSeconds(1)))
 		{
+			UE_LOG(LogTemp, Log, TEXT("3333333333333333"));
 			ClientSocket = TSharedPtr<FSocket>(ServerSocket->Accept(TEXT("TCPClient")));
 			if (ClientSocket)
 			{
+				UE_LOG(LogTemp, Log, TEXT("33333333333333333333333333333"));
 				stateCB(1, "");
 				Send(FString("Welcome to the server!"));
 				UE_LOG(LogTemp, Log, TEXT("Client connected!"));

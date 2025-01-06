@@ -10,7 +10,13 @@ void NetManager::Init(ServerStateChangeCB serverCB, ClientStateChangeCB clientCB
 	Socket->stateCB = clientCB;
 	
 	Server->StartServer();
-	Socket->Connect();
+}
+
+
+void NetManager::Close()
+{
+	Server->EndServer();
+	Socket->Close();
 }
 
 

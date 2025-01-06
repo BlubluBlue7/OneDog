@@ -23,6 +23,8 @@ public:
 	UPROPERTY(meta = (BindWidget))
 	UButton* clientBtn;
 	UPROPERTY(meta = (BindWidget))
+	UButton* clientConnect;
+	UPROPERTY(meta = (BindWidget))
 	UMultiLineEditableTextBox* serverInput;
 	UPROPERTY(meta = (BindWidget))
 	UMultiLineEditableTextBox* clientInput;
@@ -39,12 +41,18 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = "UI_Entrance")
 	void Init();
+
+	UFUNCTION(BlueprintCallable, Category = "UI_Entrance")
+	void Close();
 	
 	UFUNCTION(BlueprintCallable, Category = "UI_Entrance")
 	void ServerBtnClick();
 
 	UFUNCTION(BlueprintCallable, Category = "UI_Entrance")
 	void ClientBtnClick();
+
+	UFUNCTION(BlueprintCallable, Category = "UI_Entrance")
+	void ClientConnectClick();
 	void UpdateServerText();
 	void UpdateClientText();
 };

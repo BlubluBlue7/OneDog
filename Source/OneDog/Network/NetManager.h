@@ -12,4 +12,5 @@ public:
 	SocketInstance* Socket;
 	ServerMonitor* Server;
 	void Init(ServerStateChangeCB serverCB, ClientStateChangeCB clientCB);
+	void Close();
 };

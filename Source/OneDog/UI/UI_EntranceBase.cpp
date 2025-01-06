@@ -12,6 +12,11 @@ void UUI_EntranceBase::Init()
 	netManager->Init(serverCB, clientCB);
 }
 
+void UUI_EntranceBase::Close()
+{
+	netManager->Close();
+}
+
 void UUI_EntranceBase::ServerStateChange(int state, FString str)
 {
 	switch (state)
@@ -19,6 +24,7 @@ void UUI_EntranceBase::ServerStateChange(int state, FString str)
 	case 0:
 		serverContent += TEXT("开始监听\n");
 		UpdateServerText();
+		break;
 	case 1:
 		serverContent += TEXT("客户端接入！\n");
 		UpdateServerText();
@@ -62,6 +68,11 @@ void UUI_EntranceBase::ClientBtnClick()
 	netManager->Socket->Send(clientInput->Text.ToString());
 	clientInput->SetText(FText::FromString(TEXT("")));
 	netManager->Server->Recv();
+}
+
+void UUI_EntranceBase::ClientConnectClick()
+{
+	netManager->Socket->Connect();
 }
 
 void UUI_EntranceBase::ServerBtnClick()
