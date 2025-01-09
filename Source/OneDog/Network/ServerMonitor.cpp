@@ -7,14 +7,52 @@
 
 void ServerMonitor::StartServer()
 {
+	// 获取 Socket 子系统
+	ISocketSubsystem* SocketSubsystem = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM);
+	if (SocketSubsystem == nullptr)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Failed to get socket subsystem"));
+		return;
+	}
+
+	// 创建服务器 Socket
+	ServerSocket = SocketSubsystem->CreateSocket(NAME_Stream, TEXT("ServerSocket"), true);
+	if (ServerSocket == nullptr)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Failed to create server socket"));
+		return;
+	}
+
+	// 绑定到本地回环地址和端口
 	FIPv4Address IPAddress;
-	FIPv4Address::Parse(TEXT("0.0.0.0"), IPAddress); // 监听所有网络接口
-	FIPv4Endpoint Endpoint(IPAddress, 9996); // 监听端口 9996
-	ServerSocket = FTcpSocketBuilder(TEXT("TCPServer"))
-		.AsReusable()
-		.BoundToEndpoint(Endpoint)
-		.Listening(5);
+	FIPv4Address::Parse(TEXT("127.0.0.1"), IPAddress); // 使用本地回环地址
+	TSharedRef<FInternetAddr> Addr = SocketSubsystem->CreateInternetAddr();
+	Addr->SetIp(IPAddress.Value);
+	Addr->SetPort(12345); // 设置端口号
+
+	if (!ServerSocket->Bind(*Addr))
+	{
+		UE_LOG(LogTemp, Error, TEXT("Failed to bind server socket"));
+		return;
+	}
+
+	// 开始监听连接
+	if (!ServerSocket->Listen(5)) // 设置最大连接队列长度
+	{
+		UE_LOG(LogTemp, Error, TEXT("Failed to listen on server socket"));
+		return;
+	}
+
+	UE_LOG(LogTemp, Log, TEXT("Server is listening on 127.0.0.1:12345"));
 	
+	// FIPv4Address IPAddress;
+	// FIPv4Address::Parse(TEXT("127.0.0.1"), IPAddress); // 监听所有网络接口
+	// FIPv4Endpoint Endpoint(IPAddress, 9996); // 监听端口 9996
+	// ServerSocket = FTcpSocketBuilder(TEXT("TCPServer"))
+	// 	.AsReusable()
+	// 	.BoundToEndpoint(Endpoint)
+	// 	.Listening(5);
+	//
 	if (ServerSocket)
 	{
 		stateCB(0, "");
@@ -91,6 +129,9 @@ void ServerMonitor::HandleClientConnection()
 void ServerMonitor::Send(FString Response)
 {
 	if(!ClientSocket) return;
+
+
+	UE_LOG(LogTemp, Log, TEXT("Server Send"));
 	// 发送响应
 	FTCHARToUTF8 Convert(*Response);
 	int32 BytesSent = 0;

@@ -11,6 +11,7 @@ public:
 	FSocket* ClientSocket;
 	ClientStateChangeCB stateCB;
 	bool bIsRunning = false;
+	void AsyncConnect();
 	void Connect();
 	void Send(FString Message);
 	void Close();

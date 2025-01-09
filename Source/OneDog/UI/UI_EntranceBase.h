@@ -21,6 +21,8 @@ public:
 	UPROPERTY(meta = (BindWidget))
 	UButton* serverBtn;
 	UPROPERTY(meta = (BindWidget))
+	UButton* serverListen;
+	UPROPERTY(meta = (BindWidget))
 	UButton* clientBtn;
 	UPROPERTY(meta = (BindWidget))
 	UButton* clientConnect;
@@ -48,6 +50,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "UI_Entrance")
 	void ServerBtnClick();
 
+	UFUNCTION(BlueprintCallable, Category = "UI_Entrance")
+	void ServerListenClick();
+	
 	UFUNCTION(BlueprintCallable, Category = "UI_Entrance")
 	void ClientBtnClick();
 

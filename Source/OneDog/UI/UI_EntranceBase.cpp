@@ -82,6 +82,11 @@ void UUI_EntranceBase::ServerBtnClick()
 	netManager->Socket->Recv();
 }
 
+void UUI_EntranceBase::ServerListenClick()
+{
+	netManager->Server->StartServer();
+}
+
 void UUI_EntranceBase::UpdateClientText()
 {
 	clientText->SetText(FText::FromString(clientContent));
