@@ -49,22 +49,7 @@ void SocketInstance::Connect()
 	stateCB(1, "");
 	UE_LOG(LogTemp, Log, TEXT("Connected to server at 127.0.0.1:12345"));
 
-	// FIPv4Address IPAddress;
-	// FIPv4Address::Parse(TEXT("127.0.0.1"), IPAddress); // 服务端 IP 地址
-	// FIPv4Endpoint Endpoint(IPAddress, 9996); // 服务端端口号
-	// ClientSocket = FTcpSocketBuilder(TEXT("TCPClient"))
-	// 	.AsReusable()
-	// 	.BoundToEndpoint(Endpoint);
-	// stateCB(0, "");
-	// if (ClientSocket->Connect(*Endpoint.ToInternetAddr()))
-	// {
-	// 	stateCB(1, "");
-	// 	UE_LOG(LogTemp, Log, TEXT("Connected to server!"));
-	// }
-	// else
-	// {
-	// 	UE_LOG(LogTemp, Error, TEXT("Failed to connect to server!"));
-	// }
+	Async(EAsyncExecution::Thread, [this]() { Recv(); });
 }
 
 void SocketInstance::Close()
@@ -81,14 +66,31 @@ void SocketInstance::Close()
 	ClientSocket = nullptr;
 }
 
-void SocketInstance::Send(FString Message)
+void SocketInstance::Send(std::string Message)
 {
+	TArray<uint8> Buffer = EncodeMsg(Message);
 	// 发送消息
-	FTCHARToUTF8 Convert(*Message);
 	int32 BytesSent = 0;
-	ClientSocket->Send((uint8*)Convert.Get(), Convert.Length(), BytesSent);
-	stateCB(2, Message);
-	Recv();
+	ClientSocket->Send(Buffer.GetData(), Buffer.Num(), BytesSent);
+	// stateCB(2, Message);
+	// Recv();
+}
+
+TArray<uint8> SocketInstance::EncodeMsg(std::string Message)
+{
+	uint32 MsgSize = Message.size();
+	uint32 BufferSize = MsgSize + 20;
+	TArray<uint8> Buffer;
+	Buffer.SetNumUninitialized(BufferSize);
+
+	FMemory::Memcpy(Buffer.GetData(), &BufferSize, 4);
+	// FMemory::Memcpy(Buffer.GetData() + 4, 0, 4);
+	// FMemory::Memcpy(Buffer.GetData() + 8, 0, 4);
+	// FMemory::Memcpy(Buffer.GetData() + 12, 0, 4);
+	// FMemory::Memcpy(Buffer.GetData() + 16, 0, 4);
+	FMemory::Memcpy(Buffer.GetData() + 20, &Message, MsgSize);
+
+	return Buffer;
 }
 
 void SocketInstance::Recv()
@@ -97,15 +99,79 @@ void SocketInstance::Recv()
 	uint32 BufferSize = 1024;
 	TArray<uint8> Buffer;
 	Buffer.SetNumUninitialized(BufferSize);
-
 	int32 BytesRead = 0;
-	if (ClientSocket->Recv(Buffer.GetData(), BufferSize, BytesRead))
+	uint32 uBytesRead = 0;
+	uint32 CurrentPos;
+	while(bIsRunning)
 	{
-		FString ReceivedData = FString(UTF8_TO_TCHAR(reinterpret_cast<const char*>(Buffer.GetData())));
-		stateCB(3, ReceivedData);
-		UE_LOG(LogTemp, Log, TEXT("Received from server: %s"), *ReceivedData);
+		if (ClientSocket->Recv(Buffer.GetData(), BufferSize, BytesRead))
+		{
+			RecvBuffer.Append(Buffer.GetData(), BytesRead);
+			CurrentPos = 0;
+			uBytesRead = static_cast<uint32>(RecvBuffer.Num());
+			while(true)
+			{
+				if(CurrentMsg.Num() == 0) // 没有消息在读
+				{
+					if(uBytesRead < 20) // 没有读到消息头
+					{
+						break;
+					}
+				
+					// 读取Buffer的前4个字节，获取消息长度
+					uint32 MsgSize = 0;
+					FMemory::Memcpy(&MsgSize, RecvBuffer.GetData() + CurrentPos, 4);
+					CurrentMsg.SetNumUninitialized(MsgSize);
+					BytesLeft = MsgSize;
+				}
+
+				if(uBytesRead >= BytesLeft) // 当前消息全部读完
+				{
+					FMemory::Memcpy(CurrentMsg.GetData(), RecvBuffer.GetData() + CurrentPos, BytesLeft);
+					CurrentPos += BytesLeft;
+					uBytesRead -= BytesLeft;
+
+					BytesLeft = 0;
+					ByteArrayQueue.Enqueue(CurrentMsg);
+					CurrentMsg.Empty();
+				}
+				else
+				{
+					FMemory::Memcpy(CurrentMsg.GetData(), RecvBuffer.GetData() + CurrentPos, uBytesRead);
+					CurrentPos += uBytesRead;
+					uBytesRead = 0;
+				
+					BytesLeft -= uBytesRead;
+					break;
+				}
+			}
+
+			RecvBuffer.RemoveAt(0, CurrentPos);
+		}
 	}
 }
 
+TArray<uint8> SocketInstance::DecodeMsg(TArray<uint8> Buffer)
+{
+	uint32 BufferSize = 0;
+	FMemory::Memcpy(&BufferSize, Buffer.GetData(), 4);
+	
+	TArray<uint8> Message;
+	uint32 MsgSize = BufferSize - 20;
+	Message.SetNumUninitialized(MsgSize);
 
+	FMemory::Memcpy(Message.GetData(),Buffer.GetData() + 20, MsgSize);
+	return Message;
+}
 
+TArray<uint8> SocketInstance::GetMsg()
+{
+	TArray<uint8> Msg;
+	if(ByteArrayQueue.IsEmpty())
+	{
+		return Msg;
+	}
+
+	ByteArrayQueue.Dequeue(Msg);
+	return DecodeMsg(Msg);
+}

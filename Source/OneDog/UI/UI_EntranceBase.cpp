@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "UI_EntranceBase.h"
 
+#include "OneDog/Protobuf/ProtobufManager.h"
+
 void UUI_EntranceBase::Init()
 {
 	netManager = &NetManager::GetInstance();
@@ -15,6 +17,11 @@ void UUI_EntranceBase::Init()
 void UUI_EntranceBase::Close()
 {
 	netManager->Close();
+}
+
+void UUI_EntranceBase::Update()
+{
+	netManager->Recv();
 }
 
 void UUI_EntranceBase::ServerStateChange(int state, FString str)
@@ -65,9 +72,10 @@ void UUI_EntranceBase::ClientStateChange(int state, FString str)
 
 void UUI_EntranceBase::ClientBtnClick()
 {
-	netManager->Socket->Send(clientInput->Text.ToString());
-	clientInput->SetText(FText::FromString(TEXT("")));
-	netManager->Server->Recv();
+	std::string Message = ProtobufManager::GetInstance().Encode();
+	netManager->Socket->Send(Message);
+	// clientInput->SetText(FText::FromString(TEXT("")));
+	// netManager->Server->Recv();
 }
 
 void UUI_EntranceBase::ClientConnectClick()

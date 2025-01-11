@@ -13,4 +13,7 @@ public:
 	ServerMonitor* Server;
 	void Init(ServerStateChangeCB serverCB, ClientStateChangeCB clientCB);
 	void Close();
+
+	void Send(std::string Message);
+	void Recv();
 };
