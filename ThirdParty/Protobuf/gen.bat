@@ -1,0 +1,1 @@
+.\bin\protoc.exe --proto_path=.\proto --cpp_out=..\..\Source\OneDog\Protobuf cl.proto
