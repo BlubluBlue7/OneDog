@@ -17,12 +17,12 @@ void UUI_EntranceBase::Init()
 
 void UUI_EntranceBase::Close()
 {
-	netManager->Close();
+	// netManager->Close();
 }
 
 void UUI_EntranceBase::Update()
 {
-	netManager->Recv();
+	// netManager->Recv();
 }
 
 void UUI_EntranceBase::ServerStateChange(int state, FString str)
@@ -108,22 +108,22 @@ void UUI_EntranceBase::UpdateServerText()
 
 void UUI_EntranceBase::EnterWorld()
 {
-	// WorldManager::GetInstance().ChangeLevel(FName("Map_Test"));
-	C2L_EnterWorld EnterWorld;
-	EnterWorld.set_uid(1);
-	Vector3* pos = new Vector3();
-	pos->set_x(0);
-	pos->set_y(0);
-	pos->set_z(0);
-	EnterWorld.set_allocated_pos(pos);
-	
-	// 序列化为二进制
-	std::string BinaryData;
-	if (!EnterWorld.SerializeToString(&BinaryData))
-	{
-		UE_LOG(LogTemp, Error, TEXT("Failed to serialize Player data!"));
-	}
-	netManager->Socket->Send(BinaryData, MSG_TYPE::ID_C2L_EnterWorld);
+	WorldManager::GetInstance().ChangeLevel(FName("Map_Test"));
+	// C2L_EnterWorld EnterWorld;
+	// EnterWorld.set_uid(1);
+	// Vector3* pos = new Vector3();
+	// pos->set_x(0);
+	// pos->set_y(0);
+	// pos->set_z(0);
+	// EnterWorld.set_allocated_pos(pos);
+	//
+	// // 序列化为二进制
+	// std::string BinaryData;
+	// if (!EnterWorld.SerializeToString(&BinaryData))
+	// {
+	// 	UE_LOG(LogTemp, Error, TEXT("Failed to serialize Player data!"));
+	// }
+	// netManager->Socket->Send(BinaryData, MSG_TYPE::ID_C2L_EnterWorld);
 }
 
 

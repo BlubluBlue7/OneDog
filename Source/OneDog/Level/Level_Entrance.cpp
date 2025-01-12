@@ -4,6 +4,7 @@
 #include "Level_Entrance.h"
 
 #include "Kismet/GameplayStatics.h"
+#include "OneDog/Network/NetManager.h"
 
 // Sets default values
 ALevel_Entrance::ALevel_Entrance()
@@ -22,18 +23,19 @@ void ALevel_Entrance::BeginPlay()
 	UUserWidget* Widget = UUserWidget::CreateWidgetInstance(*World, DefaultUI, FName("DefaultUI"));
 	WorldManager::GetInstance().ChangeUI(Widget);
 	WorldManager::GetInstance().BaseActor = this;
+
+	SetLifeSpan(0);
+	SetActorTickEnabled(true);
 }
 
 void ALevel_Entrance::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-	WorldManager::GetInstance().Clear();
 }
 
 // Called every frame
 void ALevel_Entrance::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void ALevel_Entrance::OpenLevel(FName levelName)
