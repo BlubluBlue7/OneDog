@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "../Base/SingletonBase.h"
-#include "player.pb.h"
+#include "cl.pb.h"
 
 class ProtobufManager: public SingletonBase<ProtobufManager>
 {

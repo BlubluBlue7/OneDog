@@ -2,14 +2,15 @@
 #include <iostream>
 #include <cstring>
 #include <functional>
+#include "../Protobuf/cl.pb.h"
 
 using ClientStateChangeCB = std::function<void(int, FString)>;
 
 class SocketInstance
 {
 private:
-	TArray<uint8> EncodeMsg(std::string Message);
-	TArray<uint8> DecodeMsg(TArray<uint8> Buffer);
+	TArray<uint8> EncodeMsg(std::string Message, MSG_TYPE Type);
+	MSG_TYPE DecodeMsg(TArray<uint8> Buffer, TArray<uint8> Message);
 public:
 	FSocket* ClientSocket;
 	ClientStateChangeCB stateCB;
@@ -21,10 +22,10 @@ public:
 	
 	bool bIsRunning = false;
 	void AsyncConnect();
-	void Connect();
-	void Send(std::string Message);
+	bool Connect();
+	void Send(std::string Message, MSG_TYPE Type);
 	void Close();
 	void Recv();
 
-	TArray<uint8> GetMsg();
+	MSG_TYPE GetMsg(TArray<uint8> Message);
 };

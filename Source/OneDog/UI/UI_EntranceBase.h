@@ -49,6 +49,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "UI_Entrance")
 	void Update();
+
+	UFUNCTION(BlueprintCallable, Category = "UI_Entrance")
+	void EnterWorld();
 	
 	UFUNCTION(BlueprintCallable, Category = "UI_Entrance")
 	void ServerBtnClick();

@@ -1,5 +1,6 @@
 ﻿#include "NetManager.h"
 
+#include "OneDog/Level/Test/Level_Test.h"
 #include "OneDog/Protobuf/ProtobufManager.h"
 
 void NetManager::Init(ServerStateChangeCB serverCB, ClientStateChangeCB clientCB)
@@ -21,17 +22,32 @@ void NetManager::Close()
 	Socket->Close();
 }
 
-void NetManager::Send(std::string Message)
+void NetManager::Send(std::string Message, MSG_TYPE Type)
 {
-	Socket->Send(Message);
+	Socket->Send(Message, Type);
 }
 
 void NetManager::Recv()
 {
-	TArray<uint8> Buffer = Socket->GetMsg();
-	if(Buffer.Num() > 0)
+	MSG_TYPE Type = Socket->GetMsg(Buffer);
+	if(Type != ID_NONE)
 	{
-		ProtobufManager::GetInstance().Decode(Buffer);
+		switch (Type)
+		{
+		case ID_L2C_EnterWorld:
+			WorldManager::GetInstance().ChangeLevel(FName("Map_Test"));
+			break;
+		case ID_L2C_NotifyEnterWorld:
+			AActor* Actor = WorldManager::GetInstance().BaseActor;
+			ALevel_Test* Test = Cast<ALevel_Test>(Actor);
+			if(Test != nullptr)
+			{
+				Test->AddEnemy();
+			}
+			break;
+		}
+		Buffer.Empty();
+		// ProtobufManager::GetInstance().Decode(Buffer);
 	}
 }
 

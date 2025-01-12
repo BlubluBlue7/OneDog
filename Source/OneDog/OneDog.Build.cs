@@ -9,7 +9,7 @@ public class OneDog : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "Sockets", "Networking", "UMG",});
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "Sockets", "Networking", "UMG"});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 		PublicDefinitions.Add("GOOGLE_PROTOBUF_NO_ARENA=0");

@@ -2,6 +2,7 @@
 #include "UI_EntranceBase.h"
 
 #include "OneDog/Protobuf/ProtobufManager.h"
+#include "../Protobuf/cl.pb.h"
 
 void UUI_EntranceBase::Init()
 {
@@ -73,7 +74,7 @@ void UUI_EntranceBase::ClientStateChange(int state, FString str)
 void UUI_EntranceBase::ClientBtnClick()
 {
 	std::string Message = ProtobufManager::GetInstance().Encode();
-	netManager->Socket->Send(Message);
+	// netManager->Socket->Send(Message);
 	// clientInput->SetText(FText::FromString(TEXT("")));
 	// netManager->Server->Recv();
 }
@@ -103,6 +104,26 @@ void UUI_EntranceBase::UpdateClientText()
 void UUI_EntranceBase::UpdateServerText()
 {
 	serverText->SetText(FText::FromString(serverContent));
+}
+
+void UUI_EntranceBase::EnterWorld()
+{
+	// WorldManager::GetInstance().ChangeLevel(FName("Map_Test"));
+	C2L_EnterWorld EnterWorld;
+	EnterWorld.set_uid(1);
+	Vector3* pos = new Vector3();
+	pos->set_x(0);
+	pos->set_y(0);
+	pos->set_z(0);
+	EnterWorld.set_allocated_pos(pos);
+	
+	// 序列化为二进制
+	std::string BinaryData;
+	if (!EnterWorld.SerializeToString(&BinaryData))
+	{
+		UE_LOG(LogTemp, Error, TEXT("Failed to serialize Player data!"));
+	}
+	netManager->Socket->Send(BinaryData, MSG_TYPE::ID_C2L_EnterWorld);
 }
 
 

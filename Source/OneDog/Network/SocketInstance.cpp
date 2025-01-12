@@ -12,7 +12,7 @@ void SocketInstance::AsyncConnect()
 		Connect();
 	});
 }
-void SocketInstance::Connect()
+bool SocketInstance::Connect()
 {
 	bIsRunning = true;
 
@@ -21,7 +21,7 @@ void SocketInstance::Connect()
 	if (SocketSubsystem == nullptr)
 	{
 		UE_LOG(LogTemp, Error, TEXT("Failed to get socket subsystem"));
-		return;
+		return false;
 	}
 
 	// 创建客户端 Socket
@@ -29,7 +29,7 @@ void SocketInstance::Connect()
 	if (ClientSocket == nullptr)
 	{
 		UE_LOG(LogTemp, Error, TEXT("Failed to create client socket"));
-		return;
+		return false;
 	}
 	// 设置服务器地址和端口
 	FIPv4Address IPAddress;
@@ -43,13 +43,14 @@ void SocketInstance::Connect()
 	if (!ClientSocket->Connect(*Addr))
 	{
 		UE_LOG(LogTemp, Error, TEXT("Failed to connect to server"));
-		return;
+		return false;
 	}
 
 	stateCB(1, "");
 	UE_LOG(LogTemp, Log, TEXT("Connected to server at 127.0.0.1:12345"));
 
 	Async(EAsyncExecution::Thread, [this]() { Recv(); });
+	return true;
 }
 
 void SocketInstance::Close()
@@ -66,9 +67,17 @@ void SocketInstance::Close()
 	ClientSocket = nullptr;
 }
 
-void SocketInstance::Send(std::string Message)
+void SocketInstance::Send(std::string Message, MSG_TYPE Type)
 {
-	TArray<uint8> Buffer = EncodeMsg(Message);
+	if(ClientSocket == nullptr)
+	{
+		if(!Connect())
+		{
+			return;
+		}
+	}
+	
+	TArray<uint8> Buffer = EncodeMsg(Message, Type);
 	// 发送消息
 	int32 BytesSent = 0;
 	ClientSocket->Send(Buffer.GetData(), Buffer.Num(), BytesSent);
@@ -76,7 +85,7 @@ void SocketInstance::Send(std::string Message)
 	// Recv();
 }
 
-TArray<uint8> SocketInstance::EncodeMsg(std::string Message)
+TArray<uint8> SocketInstance::EncodeMsg(std::string Message, MSG_TYPE Type)
 {
 	uint32 MsgSize = Message.size();
 	uint32 BufferSize = MsgSize + 20;
@@ -84,7 +93,7 @@ TArray<uint8> SocketInstance::EncodeMsg(std::string Message)
 	Buffer.SetNumUninitialized(BufferSize);
 
 	FMemory::Memcpy(Buffer.GetData(), &BufferSize, 4);
-	// FMemory::Memcpy(Buffer.GetData() + 4, 0, 4);
+	FMemory::Memcpy(Buffer.GetData() + 4, &Type, 4);
 	// FMemory::Memcpy(Buffer.GetData() + 8, 0, 4);
 	// FMemory::Memcpy(Buffer.GetData() + 12, 0, 4);
 	// FMemory::Memcpy(Buffer.GetData() + 16, 0, 4);
@@ -151,27 +160,29 @@ void SocketInstance::Recv()
 	}
 }
 
-TArray<uint8> SocketInstance::DecodeMsg(TArray<uint8> Buffer)
+MSG_TYPE SocketInstance::DecodeMsg(TArray<uint8> Buffer, TArray<uint8> Message)
 {
 	uint32 BufferSize = 0;
 	FMemory::Memcpy(&BufferSize, Buffer.GetData(), 4);
+	MSG_TYPE Type;
+	FMemory::Memcpy(&Type, Buffer.GetData() + 4, 4);
 	
-	TArray<uint8> Message;
 	uint32 MsgSize = BufferSize - 20;
 	Message.SetNumUninitialized(MsgSize);
 
 	FMemory::Memcpy(Message.GetData(),Buffer.GetData() + 20, MsgSize);
-	return Message;
+	return Type;
 }
 
-TArray<uint8> SocketInstance::GetMsg()
+MSG_TYPE SocketInstance::GetMsg(TArray<uint8> Message)
 {
 	TArray<uint8> Msg;
 	if(ByteArrayQueue.IsEmpty())
 	{
-		return Msg;
+		return ID_NONE;
 	}
 
 	ByteArrayQueue.Dequeue(Msg);
-	return DecodeMsg(Msg);
+	MSG_TYPE Type = DecodeMsg(Msg, Message);
+	return Type;
 }
