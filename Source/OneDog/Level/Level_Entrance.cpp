@@ -24,6 +24,11 @@ void ALevel_Entrance::BeginPlay()
 	WorldManager::GetInstance().ChangeUI(Widget);
 	WorldManager::GetInstance().BaseActor = this;
 
+	if (APlayerController* PC = GetWorld()->GetFirstPlayerController())
+	{
+		PC->bShowMouseCursor = true;
+	}
+	
 	SetLifeSpan(0);
 	SetActorTickEnabled(true);
 }

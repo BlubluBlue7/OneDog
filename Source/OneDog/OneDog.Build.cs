@@ -9,7 +9,7 @@ public class OneDog : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "Sockets", "Networking", "UMG"});
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "Sockets", "Networking", "UMG",  "Json", "HTTP",});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 		PublicDefinitions.Add("GOOGLE_PROTOBUF_NO_ARENA=0");
@@ -18,6 +18,7 @@ public class OneDog : ModuleRules
 		PublicDefinitions.Add("_CRT_SECURE_NO_WARNINGS");
 		
 		PublicIncludePaths.Add("D:\\Study\\Project\\UE5\\OneDog\\ThirdParty\\Protobuf\\include");
+		PublicIncludePaths.Add(ModuleDirectory);
 		PrivateIncludePaths.Add("D:\\Study\\Project\\UE5\\OneDog\\ThirdParty\\Protobuf\\include");
 		PublicSystemIncludePaths.Add("D:\\Study\\Project\\UE5\\OneDog\\ThirdParty\\Protobuf\\include");
 		PublicAdditionalLibraries.Add("D:\\Study\\Project\\UE5\\OneDog\\ThirdParty\\Protobuf\\lib\\libprotobuf.lib");

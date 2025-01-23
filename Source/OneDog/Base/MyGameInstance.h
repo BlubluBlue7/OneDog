@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
-#include "Comp_GameInstance.h"
+#include "OneDog/Data/UserData.h"
 #include "CoreMinimal.h"
+#include "Message/MessageManager.h"
 #include "Engine/GameInstance.h"
 #include "MyGameInstance.generated.h"
 
@@ -18,5 +18,8 @@ public:
 	virtual void Init() override;
 	virtual void Shutdown() override;
 
+	UPROPERTY()
+	UMessageManager* M;
+	
 	bool Tick(float DeltaTime);
 };

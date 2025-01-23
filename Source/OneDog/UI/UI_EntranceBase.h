@@ -2,10 +2,11 @@
 
 #pragma once
 #include "../Network/NetManager.h"
-
+#include "../Data/Data.h"
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/Button.h"
+#include "Components/EditableText.h"
 #include "Components/MultiLineEditableTextBox.h"
 #include "Components/TextBlock.h"
 #include "UI_EntranceBase.generated.h"
@@ -19,25 +20,11 @@ class ONEDOG_API UUI_EntranceBase : public UUserWidget
 	NetManager* netManager;
 public:
 	UPROPERTY(meta = (BindWidget))
-	UButton* serverBtn;
-	UPROPERTY(meta = (BindWidget))
-	UButton* serverListen;
-	UPROPERTY(meta = (BindWidget))
-	UButton* clientBtn;
-	UPROPERTY(meta = (BindWidget))
-	UButton* clientConnect;
-	UPROPERTY(meta = (BindWidget))
-	UMultiLineEditableTextBox* serverInput;
-	UPROPERTY(meta = (BindWidget))
-	UMultiLineEditableTextBox* clientInput;
-	UPROPERTY(meta = (BindWidget))
-	UTextBlock* serverText;
-	UPROPERTY(meta = (BindWidget))
-	UTextBlock* clientText;
+	UEditableText* Input_ID;
 
-	FString serverContent;
-	FString clientContent;
-	
+	UPROPERTY(meta = (BindWidget))
+	UEditableText* Input_Password;
+
 	void ServerStateChange(int state, FString str);
 	void ClientStateChange(int state, FString str);
 	
@@ -51,19 +38,8 @@ public:
 	void Update();
 
 	UFUNCTION(BlueprintCallable, Category = "UI_Entrance")
-	void EnterWorld();
+	void Login();
 	
 	UFUNCTION(BlueprintCallable, Category = "UI_Entrance")
-	void ServerBtnClick();
-
-	UFUNCTION(BlueprintCallable, Category = "UI_Entrance")
-	void ServerListenClick();
-	
-	UFUNCTION(BlueprintCallable, Category = "UI_Entrance")
-	void ClientBtnClick();
-
-	UFUNCTION(BlueprintCallable, Category = "UI_Entrance")
-	void ClientConnectClick();
-	void UpdateServerText();
-	void UpdateClientText();
+	void Register();
 };

@@ -45,46 +45,82 @@ struct TableStruct_cl_2eproto {
   static const uint32_t offsets[];
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_cl_2eproto;
+class C2L_CreateAccount;
+struct C2L_CreateAccountDefaultTypeInternal;
+extern C2L_CreateAccountDefaultTypeInternal _C2L_CreateAccount_default_instance_;
 class C2L_EnterWorld;
 struct C2L_EnterWorldDefaultTypeInternal;
 extern C2L_EnterWorldDefaultTypeInternal _C2L_EnterWorld_default_instance_;
+class C2L_LeaveWorld;
+struct C2L_LeaveWorldDefaultTypeInternal;
+extern C2L_LeaveWorldDefaultTypeInternal _C2L_LeaveWorld_default_instance_;
+class C2L_Login;
+struct C2L_LoginDefaultTypeInternal;
+extern C2L_LoginDefaultTypeInternal _C2L_Login_default_instance_;
 class C2L_Move;
 struct C2L_MoveDefaultTypeInternal;
 extern C2L_MoveDefaultTypeInternal _C2L_Move_default_instance_;
 class C2L_StopMove;
 struct C2L_StopMoveDefaultTypeInternal;
 extern C2L_StopMoveDefaultTypeInternal _C2L_StopMove_default_instance_;
+class L2C_CreateAccount;
+struct L2C_CreateAccountDefaultTypeInternal;
+extern L2C_CreateAccountDefaultTypeInternal _L2C_CreateAccount_default_instance_;
 class L2C_EnterWorld;
 struct L2C_EnterWorldDefaultTypeInternal;
 extern L2C_EnterWorldDefaultTypeInternal _L2C_EnterWorld_default_instance_;
+class L2C_LeaveWorld;
+struct L2C_LeaveWorldDefaultTypeInternal;
+extern L2C_LeaveWorldDefaultTypeInternal _L2C_LeaveWorld_default_instance_;
+class L2C_Login;
+struct L2C_LoginDefaultTypeInternal;
+extern L2C_LoginDefaultTypeInternal _L2C_Login_default_instance_;
 class L2C_Move;
 struct L2C_MoveDefaultTypeInternal;
 extern L2C_MoveDefaultTypeInternal _L2C_Move_default_instance_;
 class L2C_NotifyEnterWorld;
 struct L2C_NotifyEnterWorldDefaultTypeInternal;
 extern L2C_NotifyEnterWorldDefaultTypeInternal _L2C_NotifyEnterWorld_default_instance_;
+class L2C_NotifyLeaveWorld;
+struct L2C_NotifyLeaveWorldDefaultTypeInternal;
+extern L2C_NotifyLeaveWorldDefaultTypeInternal _L2C_NotifyLeaveWorld_default_instance_;
 class L2C_NotifyMove;
 struct L2C_NotifyMoveDefaultTypeInternal;
 extern L2C_NotifyMoveDefaultTypeInternal _L2C_NotifyMove_default_instance_;
+class L2C_NotifyPlayeStates;
+struct L2C_NotifyPlayeStatesDefaultTypeInternal;
+extern L2C_NotifyPlayeStatesDefaultTypeInternal _L2C_NotifyPlayeStates_default_instance_;
 class L2C_NotifyStopMove;
 struct L2C_NotifyStopMoveDefaultTypeInternal;
 extern L2C_NotifyStopMoveDefaultTypeInternal _L2C_NotifyStopMove_default_instance_;
 class L2C_StopMove;
 struct L2C_StopMoveDefaultTypeInternal;
 extern L2C_StopMoveDefaultTypeInternal _L2C_StopMove_default_instance_;
+class PlayerState;
+struct PlayerStateDefaultTypeInternal;
+extern PlayerStateDefaultTypeInternal _PlayerState_default_instance_;
 class Vector3;
 struct Vector3DefaultTypeInternal;
 extern Vector3DefaultTypeInternal _Vector3_default_instance_;
 PROTOBUF_NAMESPACE_OPEN
+template<> ::C2L_CreateAccount* Arena::CreateMaybeMessage<::C2L_CreateAccount>(Arena*);
 template<> ::C2L_EnterWorld* Arena::CreateMaybeMessage<::C2L_EnterWorld>(Arena*);
+template<> ::C2L_LeaveWorld* Arena::CreateMaybeMessage<::C2L_LeaveWorld>(Arena*);
+template<> ::C2L_Login* Arena::CreateMaybeMessage<::C2L_Login>(Arena*);
 template<> ::C2L_Move* Arena::CreateMaybeMessage<::C2L_Move>(Arena*);
 template<> ::C2L_StopMove* Arena::CreateMaybeMessage<::C2L_StopMove>(Arena*);
+template<> ::L2C_CreateAccount* Arena::CreateMaybeMessage<::L2C_CreateAccount>(Arena*);
 template<> ::L2C_EnterWorld* Arena::CreateMaybeMessage<::L2C_EnterWorld>(Arena*);
+template<> ::L2C_LeaveWorld* Arena::CreateMaybeMessage<::L2C_LeaveWorld>(Arena*);
+template<> ::L2C_Login* Arena::CreateMaybeMessage<::L2C_Login>(Arena*);
 template<> ::L2C_Move* Arena::CreateMaybeMessage<::L2C_Move>(Arena*);
 template<> ::L2C_NotifyEnterWorld* Arena::CreateMaybeMessage<::L2C_NotifyEnterWorld>(Arena*);
+template<> ::L2C_NotifyLeaveWorld* Arena::CreateMaybeMessage<::L2C_NotifyLeaveWorld>(Arena*);
 template<> ::L2C_NotifyMove* Arena::CreateMaybeMessage<::L2C_NotifyMove>(Arena*);
+template<> ::L2C_NotifyPlayeStates* Arena::CreateMaybeMessage<::L2C_NotifyPlayeStates>(Arena*);
 template<> ::L2C_NotifyStopMove* Arena::CreateMaybeMessage<::L2C_NotifyStopMove>(Arena*);
 template<> ::L2C_StopMove* Arena::CreateMaybeMessage<::L2C_StopMove>(Arena*);
+template<> ::PlayerState* Arena::CreateMaybeMessage<::PlayerState>(Arena*);
 template<> ::Vector3* Arena::CreateMaybeMessage<::Vector3>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 
@@ -99,12 +135,20 @@ enum MSG_TYPE : int {
   ID_C2L_StopMove = 7,
   ID_L2C_StopMove = 8,
   ID_L2C_NotifyStopMove = 9,
+  ID_C2L_CreateAccount = 10,
+  ID_L2C_CreateAccount = 11,
+  ID_C2L_Login = 12,
+  ID_L2C_Login = 13,
+  ID_C2L_LeaveWorld = 14,
+  ID_L2C_LeaveWorld = 15,
+  ID_L2C_NotifyLeaveWorld = 16,
+  ID_L2C_NotifyPlayeStates = 17,
   MSG_TYPE_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
   MSG_TYPE_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
 bool MSG_TYPE_IsValid(int value);
 constexpr MSG_TYPE MSG_TYPE_MIN = ID_NONE;
-constexpr MSG_TYPE MSG_TYPE_MAX = ID_L2C_NotifyStopMove;
+constexpr MSG_TYPE MSG_TYPE_MAX = ID_L2C_NotifyPlayeStates;
 constexpr int MSG_TYPE_ARRAYSIZE = MSG_TYPE_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MSG_TYPE_descriptor();
@@ -919,6 +963,7 @@ class C2L_Move final :
 
   enum : int {
     kDirectionFieldNumber = 2,
+    kPosFieldNumber = 4,
     kUidFieldNumber = 1,
     kSpeedFieldNumber = 3,
   };
@@ -939,6 +984,24 @@ class C2L_Move final :
   void unsafe_arena_set_allocated_direction(
       ::Vector3* direction);
   ::Vector3* unsafe_arena_release_direction();
+
+  // .Vector3 pos = 4;
+  bool has_pos() const;
+  private:
+  bool _internal_has_pos() const;
+  public:
+  void clear_pos();
+  const ::Vector3& pos() const;
+  PROTOBUF_NODISCARD ::Vector3* release_pos();
+  ::Vector3* mutable_pos();
+  void set_allocated_pos(::Vector3* pos);
+  private:
+  const ::Vector3& _internal_pos() const;
+  ::Vector3* _internal_mutable_pos();
+  public:
+  void unsafe_arena_set_allocated_pos(
+      ::Vector3* pos);
+  ::Vector3* unsafe_arena_release_pos();
 
   // uint64 uid = 1;
   void clear_uid();
@@ -966,6 +1029,7 @@ class C2L_Move final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::Vector3* direction_;
+  ::Vector3* pos_;
   uint64_t uid_;
   float speed_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -1093,6 +1157,7 @@ class L2C_Move final :
 
   enum : int {
     kDirectionFieldNumber = 3,
+    kPosFieldNumber = 5,
     kUidFieldNumber = 2,
     kRetFieldNumber = 1,
     kSpeedFieldNumber = 4,
@@ -1114,6 +1179,24 @@ class L2C_Move final :
   void unsafe_arena_set_allocated_direction(
       ::Vector3* direction);
   ::Vector3* unsafe_arena_release_direction();
+
+  // .Vector3 pos = 5;
+  bool has_pos() const;
+  private:
+  bool _internal_has_pos() const;
+  public:
+  void clear_pos();
+  const ::Vector3& pos() const;
+  PROTOBUF_NODISCARD ::Vector3* release_pos();
+  ::Vector3* mutable_pos();
+  void set_allocated_pos(::Vector3* pos);
+  private:
+  const ::Vector3& _internal_pos() const;
+  ::Vector3* _internal_mutable_pos();
+  public:
+  void unsafe_arena_set_allocated_pos(
+      ::Vector3* pos);
+  ::Vector3* unsafe_arena_release_pos();
 
   // uint64 uid = 2;
   void clear_uid();
@@ -1150,6 +1233,7 @@ class L2C_Move final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::Vector3* direction_;
+  ::Vector3* pos_;
   uint64_t uid_;
   uint32_t ret_;
   float speed_;
@@ -1278,6 +1362,7 @@ class L2C_NotifyMove final :
 
   enum : int {
     kDirectionFieldNumber = 3,
+    kPosFieldNumber = 5,
     kUidFieldNumber = 2,
     kRetFieldNumber = 1,
     kSpeedFieldNumber = 4,
@@ -1299,6 +1384,24 @@ class L2C_NotifyMove final :
   void unsafe_arena_set_allocated_direction(
       ::Vector3* direction);
   ::Vector3* unsafe_arena_release_direction();
+
+  // .Vector3 pos = 5;
+  bool has_pos() const;
+  private:
+  bool _internal_has_pos() const;
+  public:
+  void clear_pos();
+  const ::Vector3& pos() const;
+  PROTOBUF_NODISCARD ::Vector3* release_pos();
+  ::Vector3* mutable_pos();
+  void set_allocated_pos(::Vector3* pos);
+  private:
+  const ::Vector3& _internal_pos() const;
+  ::Vector3* _internal_mutable_pos();
+  public:
+  void unsafe_arena_set_allocated_pos(
+      ::Vector3* pos);
+  ::Vector3* unsafe_arena_release_pos();
 
   // uint64 uid = 2;
   void clear_uid();
@@ -1335,6 +1438,7 @@ class L2C_NotifyMove final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::Vector3* direction_;
+  ::Vector3* pos_;
   uint64_t uid_;
   uint32_t ret_;
   float speed_;
@@ -1788,6 +1892,1525 @@ class L2C_NotifyStopMove final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   uint64_t uid_;
+  uint32_t ret_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_cl_2eproto;
+};
+// -------------------------------------------------------------------
+
+class C2L_CreateAccount final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:C2L_CreateAccount) */ {
+ public:
+  inline C2L_CreateAccount() : C2L_CreateAccount(nullptr) {}
+  ~C2L_CreateAccount() override;
+  explicit PROTOBUF_CONSTEXPR C2L_CreateAccount(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  C2L_CreateAccount(const C2L_CreateAccount& from);
+  C2L_CreateAccount(C2L_CreateAccount&& from) noexcept
+    : C2L_CreateAccount() {
+    *this = ::std::move(from);
+  }
+
+  inline C2L_CreateAccount& operator=(const C2L_CreateAccount& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline C2L_CreateAccount& operator=(C2L_CreateAccount&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const C2L_CreateAccount& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const C2L_CreateAccount* internal_default_instance() {
+    return reinterpret_cast<const C2L_CreateAccount*>(
+               &_C2L_CreateAccount_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    10;
+
+  friend void swap(C2L_CreateAccount& a, C2L_CreateAccount& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(C2L_CreateAccount* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(C2L_CreateAccount* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  C2L_CreateAccount* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<C2L_CreateAccount>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const C2L_CreateAccount& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom(const C2L_CreateAccount& from);
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(C2L_CreateAccount* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "C2L_CreateAccount";
+  }
+  protected:
+  explicit C2L_CreateAccount(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kAccountFieldNumber = 1,
+    kPasswordFieldNumber = 2,
+  };
+  // string account = 1;
+  void clear_account();
+  const std::string& account() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_account(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_account();
+  PROTOBUF_NODISCARD std::string* release_account();
+  void set_allocated_account(std::string* account);
+  private:
+  const std::string& _internal_account() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_account(const std::string& value);
+  std::string* _internal_mutable_account();
+  public:
+
+  // string password = 2;
+  void clear_password();
+  const std::string& password() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_password(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_password();
+  PROTOBUF_NODISCARD std::string* release_password();
+  void set_allocated_password(std::string* password);
+  private:
+  const std::string& _internal_password() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_password(const std::string& value);
+  std::string* _internal_mutable_password();
+  public:
+
+  // @@protoc_insertion_point(class_scope:C2L_CreateAccount)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr account_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr password_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_cl_2eproto;
+};
+// -------------------------------------------------------------------
+
+class L2C_CreateAccount final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:L2C_CreateAccount) */ {
+ public:
+  inline L2C_CreateAccount() : L2C_CreateAccount(nullptr) {}
+  ~L2C_CreateAccount() override;
+  explicit PROTOBUF_CONSTEXPR L2C_CreateAccount(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  L2C_CreateAccount(const L2C_CreateAccount& from);
+  L2C_CreateAccount(L2C_CreateAccount&& from) noexcept
+    : L2C_CreateAccount() {
+    *this = ::std::move(from);
+  }
+
+  inline L2C_CreateAccount& operator=(const L2C_CreateAccount& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline L2C_CreateAccount& operator=(L2C_CreateAccount&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const L2C_CreateAccount& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const L2C_CreateAccount* internal_default_instance() {
+    return reinterpret_cast<const L2C_CreateAccount*>(
+               &_L2C_CreateAccount_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    11;
+
+  friend void swap(L2C_CreateAccount& a, L2C_CreateAccount& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(L2C_CreateAccount* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(L2C_CreateAccount* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  L2C_CreateAccount* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<L2C_CreateAccount>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const L2C_CreateAccount& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom(const L2C_CreateAccount& from);
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(L2C_CreateAccount* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "L2C_CreateAccount";
+  }
+  protected:
+  explicit L2C_CreateAccount(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kAccountFieldNumber = 2,
+    kPasswordFieldNumber = 3,
+    kUidFieldNumber = 4,
+    kRetFieldNumber = 1,
+  };
+  // string account = 2;
+  void clear_account();
+  const std::string& account() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_account(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_account();
+  PROTOBUF_NODISCARD std::string* release_account();
+  void set_allocated_account(std::string* account);
+  private:
+  const std::string& _internal_account() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_account(const std::string& value);
+  std::string* _internal_mutable_account();
+  public:
+
+  // string password = 3;
+  void clear_password();
+  const std::string& password() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_password(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_password();
+  PROTOBUF_NODISCARD std::string* release_password();
+  void set_allocated_password(std::string* password);
+  private:
+  const std::string& _internal_password() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_password(const std::string& value);
+  std::string* _internal_mutable_password();
+  public:
+
+  // uint64 uid = 4;
+  void clear_uid();
+  uint64_t uid() const;
+  void set_uid(uint64_t value);
+  private:
+  uint64_t _internal_uid() const;
+  void _internal_set_uid(uint64_t value);
+  public:
+
+  // uint32 ret = 1;
+  void clear_ret();
+  uint32_t ret() const;
+  void set_ret(uint32_t value);
+  private:
+  uint32_t _internal_ret() const;
+  void _internal_set_ret(uint32_t value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:L2C_CreateAccount)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr account_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr password_;
+  uint64_t uid_;
+  uint32_t ret_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_cl_2eproto;
+};
+// -------------------------------------------------------------------
+
+class C2L_Login final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:C2L_Login) */ {
+ public:
+  inline C2L_Login() : C2L_Login(nullptr) {}
+  ~C2L_Login() override;
+  explicit PROTOBUF_CONSTEXPR C2L_Login(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  C2L_Login(const C2L_Login& from);
+  C2L_Login(C2L_Login&& from) noexcept
+    : C2L_Login() {
+    *this = ::std::move(from);
+  }
+
+  inline C2L_Login& operator=(const C2L_Login& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline C2L_Login& operator=(C2L_Login&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const C2L_Login& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const C2L_Login* internal_default_instance() {
+    return reinterpret_cast<const C2L_Login*>(
+               &_C2L_Login_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    12;
+
+  friend void swap(C2L_Login& a, C2L_Login& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(C2L_Login* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(C2L_Login* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  C2L_Login* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<C2L_Login>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const C2L_Login& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom(const C2L_Login& from);
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(C2L_Login* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "C2L_Login";
+  }
+  protected:
+  explicit C2L_Login(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kAccountFieldNumber = 1,
+    kPasswordFieldNumber = 2,
+  };
+  // string account = 1;
+  void clear_account();
+  const std::string& account() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_account(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_account();
+  PROTOBUF_NODISCARD std::string* release_account();
+  void set_allocated_account(std::string* account);
+  private:
+  const std::string& _internal_account() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_account(const std::string& value);
+  std::string* _internal_mutable_account();
+  public:
+
+  // string password = 2;
+  void clear_password();
+  const std::string& password() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_password(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_password();
+  PROTOBUF_NODISCARD std::string* release_password();
+  void set_allocated_password(std::string* password);
+  private:
+  const std::string& _internal_password() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_password(const std::string& value);
+  std::string* _internal_mutable_password();
+  public:
+
+  // @@protoc_insertion_point(class_scope:C2L_Login)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr account_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr password_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_cl_2eproto;
+};
+// -------------------------------------------------------------------
+
+class L2C_Login final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:L2C_Login) */ {
+ public:
+  inline L2C_Login() : L2C_Login(nullptr) {}
+  ~L2C_Login() override;
+  explicit PROTOBUF_CONSTEXPR L2C_Login(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  L2C_Login(const L2C_Login& from);
+  L2C_Login(L2C_Login&& from) noexcept
+    : L2C_Login() {
+    *this = ::std::move(from);
+  }
+
+  inline L2C_Login& operator=(const L2C_Login& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline L2C_Login& operator=(L2C_Login&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const L2C_Login& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const L2C_Login* internal_default_instance() {
+    return reinterpret_cast<const L2C_Login*>(
+               &_L2C_Login_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    13;
+
+  friend void swap(L2C_Login& a, L2C_Login& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(L2C_Login* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(L2C_Login* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  L2C_Login* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<L2C_Login>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const L2C_Login& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom(const L2C_Login& from);
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(L2C_Login* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "L2C_Login";
+  }
+  protected:
+  explicit L2C_Login(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kAccountFieldNumber = 2,
+    kPasswordFieldNumber = 3,
+    kUidFieldNumber = 4,
+    kRetFieldNumber = 1,
+  };
+  // string account = 2;
+  void clear_account();
+  const std::string& account() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_account(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_account();
+  PROTOBUF_NODISCARD std::string* release_account();
+  void set_allocated_account(std::string* account);
+  private:
+  const std::string& _internal_account() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_account(const std::string& value);
+  std::string* _internal_mutable_account();
+  public:
+
+  // string password = 3;
+  void clear_password();
+  const std::string& password() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_password(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_password();
+  PROTOBUF_NODISCARD std::string* release_password();
+  void set_allocated_password(std::string* password);
+  private:
+  const std::string& _internal_password() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_password(const std::string& value);
+  std::string* _internal_mutable_password();
+  public:
+
+  // uint64 uid = 4;
+  void clear_uid();
+  uint64_t uid() const;
+  void set_uid(uint64_t value);
+  private:
+  uint64_t _internal_uid() const;
+  void _internal_set_uid(uint64_t value);
+  public:
+
+  // uint32 ret = 1;
+  void clear_ret();
+  uint32_t ret() const;
+  void set_ret(uint32_t value);
+  private:
+  uint32_t _internal_ret() const;
+  void _internal_set_ret(uint32_t value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:L2C_Login)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr account_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr password_;
+  uint64_t uid_;
+  uint32_t ret_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_cl_2eproto;
+};
+// -------------------------------------------------------------------
+
+class C2L_LeaveWorld final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:C2L_LeaveWorld) */ {
+ public:
+  inline C2L_LeaveWorld() : C2L_LeaveWorld(nullptr) {}
+  ~C2L_LeaveWorld() override;
+  explicit PROTOBUF_CONSTEXPR C2L_LeaveWorld(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  C2L_LeaveWorld(const C2L_LeaveWorld& from);
+  C2L_LeaveWorld(C2L_LeaveWorld&& from) noexcept
+    : C2L_LeaveWorld() {
+    *this = ::std::move(from);
+  }
+
+  inline C2L_LeaveWorld& operator=(const C2L_LeaveWorld& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline C2L_LeaveWorld& operator=(C2L_LeaveWorld&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const C2L_LeaveWorld& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const C2L_LeaveWorld* internal_default_instance() {
+    return reinterpret_cast<const C2L_LeaveWorld*>(
+               &_C2L_LeaveWorld_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    14;
+
+  friend void swap(C2L_LeaveWorld& a, C2L_LeaveWorld& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(C2L_LeaveWorld* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(C2L_LeaveWorld* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  C2L_LeaveWorld* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<C2L_LeaveWorld>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const C2L_LeaveWorld& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom(const C2L_LeaveWorld& from);
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(C2L_LeaveWorld* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "C2L_LeaveWorld";
+  }
+  protected:
+  explicit C2L_LeaveWorld(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kUidFieldNumber = 1,
+  };
+  // uint64 uid = 1;
+  void clear_uid();
+  uint64_t uid() const;
+  void set_uid(uint64_t value);
+  private:
+  uint64_t _internal_uid() const;
+  void _internal_set_uid(uint64_t value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:C2L_LeaveWorld)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  uint64_t uid_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_cl_2eproto;
+};
+// -------------------------------------------------------------------
+
+class L2C_LeaveWorld final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:L2C_LeaveWorld) */ {
+ public:
+  inline L2C_LeaveWorld() : L2C_LeaveWorld(nullptr) {}
+  ~L2C_LeaveWorld() override;
+  explicit PROTOBUF_CONSTEXPR L2C_LeaveWorld(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  L2C_LeaveWorld(const L2C_LeaveWorld& from);
+  L2C_LeaveWorld(L2C_LeaveWorld&& from) noexcept
+    : L2C_LeaveWorld() {
+    *this = ::std::move(from);
+  }
+
+  inline L2C_LeaveWorld& operator=(const L2C_LeaveWorld& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline L2C_LeaveWorld& operator=(L2C_LeaveWorld&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const L2C_LeaveWorld& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const L2C_LeaveWorld* internal_default_instance() {
+    return reinterpret_cast<const L2C_LeaveWorld*>(
+               &_L2C_LeaveWorld_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    15;
+
+  friend void swap(L2C_LeaveWorld& a, L2C_LeaveWorld& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(L2C_LeaveWorld* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(L2C_LeaveWorld* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  L2C_LeaveWorld* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<L2C_LeaveWorld>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const L2C_LeaveWorld& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom(const L2C_LeaveWorld& from);
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(L2C_LeaveWorld* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "L2C_LeaveWorld";
+  }
+  protected:
+  explicit L2C_LeaveWorld(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kUidFieldNumber = 2,
+    kRetFieldNumber = 1,
+  };
+  // uint64 uid = 2;
+  void clear_uid();
+  uint64_t uid() const;
+  void set_uid(uint64_t value);
+  private:
+  uint64_t _internal_uid() const;
+  void _internal_set_uid(uint64_t value);
+  public:
+
+  // uint32 ret = 1;
+  void clear_ret();
+  uint32_t ret() const;
+  void set_ret(uint32_t value);
+  private:
+  uint32_t _internal_ret() const;
+  void _internal_set_ret(uint32_t value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:L2C_LeaveWorld)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  uint64_t uid_;
+  uint32_t ret_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_cl_2eproto;
+};
+// -------------------------------------------------------------------
+
+class L2C_NotifyLeaveWorld final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:L2C_NotifyLeaveWorld) */ {
+ public:
+  inline L2C_NotifyLeaveWorld() : L2C_NotifyLeaveWorld(nullptr) {}
+  ~L2C_NotifyLeaveWorld() override;
+  explicit PROTOBUF_CONSTEXPR L2C_NotifyLeaveWorld(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  L2C_NotifyLeaveWorld(const L2C_NotifyLeaveWorld& from);
+  L2C_NotifyLeaveWorld(L2C_NotifyLeaveWorld&& from) noexcept
+    : L2C_NotifyLeaveWorld() {
+    *this = ::std::move(from);
+  }
+
+  inline L2C_NotifyLeaveWorld& operator=(const L2C_NotifyLeaveWorld& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline L2C_NotifyLeaveWorld& operator=(L2C_NotifyLeaveWorld&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const L2C_NotifyLeaveWorld& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const L2C_NotifyLeaveWorld* internal_default_instance() {
+    return reinterpret_cast<const L2C_NotifyLeaveWorld*>(
+               &_L2C_NotifyLeaveWorld_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    16;
+
+  friend void swap(L2C_NotifyLeaveWorld& a, L2C_NotifyLeaveWorld& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(L2C_NotifyLeaveWorld* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(L2C_NotifyLeaveWorld* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  L2C_NotifyLeaveWorld* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<L2C_NotifyLeaveWorld>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const L2C_NotifyLeaveWorld& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom(const L2C_NotifyLeaveWorld& from);
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(L2C_NotifyLeaveWorld* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "L2C_NotifyLeaveWorld";
+  }
+  protected:
+  explicit L2C_NotifyLeaveWorld(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kUidFieldNumber = 2,
+    kRetFieldNumber = 1,
+  };
+  // uint64 uid = 2;
+  void clear_uid();
+  uint64_t uid() const;
+  void set_uid(uint64_t value);
+  private:
+  uint64_t _internal_uid() const;
+  void _internal_set_uid(uint64_t value);
+  public:
+
+  // uint32 ret = 1;
+  void clear_ret();
+  uint32_t ret() const;
+  void set_ret(uint32_t value);
+  private:
+  uint32_t _internal_ret() const;
+  void _internal_set_ret(uint32_t value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:L2C_NotifyLeaveWorld)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  uint64_t uid_;
+  uint32_t ret_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_cl_2eproto;
+};
+// -------------------------------------------------------------------
+
+class PlayerState final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:PlayerState) */ {
+ public:
+  inline PlayerState() : PlayerState(nullptr) {}
+  ~PlayerState() override;
+  explicit PROTOBUF_CONSTEXPR PlayerState(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  PlayerState(const PlayerState& from);
+  PlayerState(PlayerState&& from) noexcept
+    : PlayerState() {
+    *this = ::std::move(from);
+  }
+
+  inline PlayerState& operator=(const PlayerState& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline PlayerState& operator=(PlayerState&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const PlayerState& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const PlayerState* internal_default_instance() {
+    return reinterpret_cast<const PlayerState*>(
+               &_PlayerState_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    17;
+
+  friend void swap(PlayerState& a, PlayerState& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(PlayerState* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(PlayerState* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  PlayerState* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<PlayerState>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const PlayerState& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom(const PlayerState& from);
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(PlayerState* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "PlayerState";
+  }
+  protected:
+  explicit PlayerState(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPosFieldNumber = 2,
+    kDirectionFieldNumber = 3,
+    kUidFieldNumber = 1,
+    kSpeedFieldNumber = 4,
+    kIsMoveFieldNumber = 5,
+  };
+  // .Vector3 pos = 2;
+  bool has_pos() const;
+  private:
+  bool _internal_has_pos() const;
+  public:
+  void clear_pos();
+  const ::Vector3& pos() const;
+  PROTOBUF_NODISCARD ::Vector3* release_pos();
+  ::Vector3* mutable_pos();
+  void set_allocated_pos(::Vector3* pos);
+  private:
+  const ::Vector3& _internal_pos() const;
+  ::Vector3* _internal_mutable_pos();
+  public:
+  void unsafe_arena_set_allocated_pos(
+      ::Vector3* pos);
+  ::Vector3* unsafe_arena_release_pos();
+
+  // .Vector3 direction = 3;
+  bool has_direction() const;
+  private:
+  bool _internal_has_direction() const;
+  public:
+  void clear_direction();
+  const ::Vector3& direction() const;
+  PROTOBUF_NODISCARD ::Vector3* release_direction();
+  ::Vector3* mutable_direction();
+  void set_allocated_direction(::Vector3* direction);
+  private:
+  const ::Vector3& _internal_direction() const;
+  ::Vector3* _internal_mutable_direction();
+  public:
+  void unsafe_arena_set_allocated_direction(
+      ::Vector3* direction);
+  ::Vector3* unsafe_arena_release_direction();
+
+  // uint64 uid = 1;
+  void clear_uid();
+  uint64_t uid() const;
+  void set_uid(uint64_t value);
+  private:
+  uint64_t _internal_uid() const;
+  void _internal_set_uid(uint64_t value);
+  public:
+
+  // float speed = 4;
+  void clear_speed();
+  float speed() const;
+  void set_speed(float value);
+  private:
+  float _internal_speed() const;
+  void _internal_set_speed(float value);
+  public:
+
+  // bool is_move = 5;
+  void clear_is_move();
+  bool is_move() const;
+  void set_is_move(bool value);
+  private:
+  bool _internal_is_move() const;
+  void _internal_set_is_move(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:PlayerState)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::Vector3* pos_;
+  ::Vector3* direction_;
+  uint64_t uid_;
+  float speed_;
+  bool is_move_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_cl_2eproto;
+};
+// -------------------------------------------------------------------
+
+class L2C_NotifyPlayeStates final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:L2C_NotifyPlayeStates) */ {
+ public:
+  inline L2C_NotifyPlayeStates() : L2C_NotifyPlayeStates(nullptr) {}
+  ~L2C_NotifyPlayeStates() override;
+  explicit PROTOBUF_CONSTEXPR L2C_NotifyPlayeStates(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  L2C_NotifyPlayeStates(const L2C_NotifyPlayeStates& from);
+  L2C_NotifyPlayeStates(L2C_NotifyPlayeStates&& from) noexcept
+    : L2C_NotifyPlayeStates() {
+    *this = ::std::move(from);
+  }
+
+  inline L2C_NotifyPlayeStates& operator=(const L2C_NotifyPlayeStates& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline L2C_NotifyPlayeStates& operator=(L2C_NotifyPlayeStates&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const L2C_NotifyPlayeStates& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const L2C_NotifyPlayeStates* internal_default_instance() {
+    return reinterpret_cast<const L2C_NotifyPlayeStates*>(
+               &_L2C_NotifyPlayeStates_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    18;
+
+  friend void swap(L2C_NotifyPlayeStates& a, L2C_NotifyPlayeStates& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(L2C_NotifyPlayeStates* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(L2C_NotifyPlayeStates* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  L2C_NotifyPlayeStates* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<L2C_NotifyPlayeStates>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const L2C_NotifyPlayeStates& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom(const L2C_NotifyPlayeStates& from);
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(L2C_NotifyPlayeStates* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "L2C_NotifyPlayeStates";
+  }
+  protected:
+  explicit L2C_NotifyPlayeStates(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPlayerStatesFieldNumber = 2,
+    kRetFieldNumber = 1,
+  };
+  // repeated .PlayerState player_states = 2;
+  int player_states_size() const;
+  private:
+  int _internal_player_states_size() const;
+  public:
+  void clear_player_states();
+  ::PlayerState* mutable_player_states(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::PlayerState >*
+      mutable_player_states();
+  private:
+  const ::PlayerState& _internal_player_states(int index) const;
+  ::PlayerState* _internal_add_player_states();
+  public:
+  const ::PlayerState& player_states(int index) const;
+  ::PlayerState* add_player_states();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::PlayerState >&
+      player_states() const;
+
+  // uint32 ret = 1;
+  void clear_ret();
+  uint32_t ret() const;
+  void set_ret(uint32_t value);
+  private:
+  uint32_t _internal_ret() const;
+  void _internal_set_ret(uint32_t value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:L2C_NotifyPlayeStates)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::PlayerState > player_states_;
   uint32_t ret_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_cl_2eproto;
@@ -2379,6 +4002,96 @@ inline void C2L_Move::set_speed(float value) {
   // @@protoc_insertion_point(field_set:C2L_Move.speed)
 }
 
+// .Vector3 pos = 4;
+inline bool C2L_Move::_internal_has_pos() const {
+  return this != internal_default_instance() && pos_ != nullptr;
+}
+inline bool C2L_Move::has_pos() const {
+  return _internal_has_pos();
+}
+inline void C2L_Move::clear_pos() {
+  if (GetArenaForAllocation() == nullptr && pos_ != nullptr) {
+    delete pos_;
+  }
+  pos_ = nullptr;
+}
+inline const ::Vector3& C2L_Move::_internal_pos() const {
+  const ::Vector3* p = pos_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Vector3&>(
+      ::_Vector3_default_instance_);
+}
+inline const ::Vector3& C2L_Move::pos() const {
+  // @@protoc_insertion_point(field_get:C2L_Move.pos)
+  return _internal_pos();
+}
+inline void C2L_Move::unsafe_arena_set_allocated_pos(
+    ::Vector3* pos) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(pos_);
+  }
+  pos_ = pos;
+  if (pos) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:C2L_Move.pos)
+}
+inline ::Vector3* C2L_Move::release_pos() {
+  
+  ::Vector3* temp = pos_;
+  pos_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::Vector3* C2L_Move::unsafe_arena_release_pos() {
+  // @@protoc_insertion_point(field_release:C2L_Move.pos)
+  
+  ::Vector3* temp = pos_;
+  pos_ = nullptr;
+  return temp;
+}
+inline ::Vector3* C2L_Move::_internal_mutable_pos() {
+  
+  if (pos_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Vector3>(GetArenaForAllocation());
+    pos_ = p;
+  }
+  return pos_;
+}
+inline ::Vector3* C2L_Move::mutable_pos() {
+  ::Vector3* _msg = _internal_mutable_pos();
+  // @@protoc_insertion_point(field_mutable:C2L_Move.pos)
+  return _msg;
+}
+inline void C2L_Move::set_allocated_pos(::Vector3* pos) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete pos_;
+  }
+  if (pos) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(pos);
+    if (message_arena != submessage_arena) {
+      pos = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, pos, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  pos_ = pos;
+  // @@protoc_insertion_point(field_set_allocated:C2L_Move.pos)
+}
+
 // -------------------------------------------------------------------
 
 // L2C_Move
@@ -2531,6 +4244,96 @@ inline void L2C_Move::_internal_set_speed(float value) {
 inline void L2C_Move::set_speed(float value) {
   _internal_set_speed(value);
   // @@protoc_insertion_point(field_set:L2C_Move.speed)
+}
+
+// .Vector3 pos = 5;
+inline bool L2C_Move::_internal_has_pos() const {
+  return this != internal_default_instance() && pos_ != nullptr;
+}
+inline bool L2C_Move::has_pos() const {
+  return _internal_has_pos();
+}
+inline void L2C_Move::clear_pos() {
+  if (GetArenaForAllocation() == nullptr && pos_ != nullptr) {
+    delete pos_;
+  }
+  pos_ = nullptr;
+}
+inline const ::Vector3& L2C_Move::_internal_pos() const {
+  const ::Vector3* p = pos_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Vector3&>(
+      ::_Vector3_default_instance_);
+}
+inline const ::Vector3& L2C_Move::pos() const {
+  // @@protoc_insertion_point(field_get:L2C_Move.pos)
+  return _internal_pos();
+}
+inline void L2C_Move::unsafe_arena_set_allocated_pos(
+    ::Vector3* pos) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(pos_);
+  }
+  pos_ = pos;
+  if (pos) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:L2C_Move.pos)
+}
+inline ::Vector3* L2C_Move::release_pos() {
+  
+  ::Vector3* temp = pos_;
+  pos_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::Vector3* L2C_Move::unsafe_arena_release_pos() {
+  // @@protoc_insertion_point(field_release:L2C_Move.pos)
+  
+  ::Vector3* temp = pos_;
+  pos_ = nullptr;
+  return temp;
+}
+inline ::Vector3* L2C_Move::_internal_mutable_pos() {
+  
+  if (pos_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Vector3>(GetArenaForAllocation());
+    pos_ = p;
+  }
+  return pos_;
+}
+inline ::Vector3* L2C_Move::mutable_pos() {
+  ::Vector3* _msg = _internal_mutable_pos();
+  // @@protoc_insertion_point(field_mutable:L2C_Move.pos)
+  return _msg;
+}
+inline void L2C_Move::set_allocated_pos(::Vector3* pos) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete pos_;
+  }
+  if (pos) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(pos);
+    if (message_arena != submessage_arena) {
+      pos = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, pos, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  pos_ = pos;
+  // @@protoc_insertion_point(field_set_allocated:L2C_Move.pos)
 }
 
 // -------------------------------------------------------------------
@@ -2687,6 +4490,96 @@ inline void L2C_NotifyMove::set_speed(float value) {
   // @@protoc_insertion_point(field_set:L2C_NotifyMove.speed)
 }
 
+// .Vector3 pos = 5;
+inline bool L2C_NotifyMove::_internal_has_pos() const {
+  return this != internal_default_instance() && pos_ != nullptr;
+}
+inline bool L2C_NotifyMove::has_pos() const {
+  return _internal_has_pos();
+}
+inline void L2C_NotifyMove::clear_pos() {
+  if (GetArenaForAllocation() == nullptr && pos_ != nullptr) {
+    delete pos_;
+  }
+  pos_ = nullptr;
+}
+inline const ::Vector3& L2C_NotifyMove::_internal_pos() const {
+  const ::Vector3* p = pos_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Vector3&>(
+      ::_Vector3_default_instance_);
+}
+inline const ::Vector3& L2C_NotifyMove::pos() const {
+  // @@protoc_insertion_point(field_get:L2C_NotifyMove.pos)
+  return _internal_pos();
+}
+inline void L2C_NotifyMove::unsafe_arena_set_allocated_pos(
+    ::Vector3* pos) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(pos_);
+  }
+  pos_ = pos;
+  if (pos) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:L2C_NotifyMove.pos)
+}
+inline ::Vector3* L2C_NotifyMove::release_pos() {
+  
+  ::Vector3* temp = pos_;
+  pos_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::Vector3* L2C_NotifyMove::unsafe_arena_release_pos() {
+  // @@protoc_insertion_point(field_release:L2C_NotifyMove.pos)
+  
+  ::Vector3* temp = pos_;
+  pos_ = nullptr;
+  return temp;
+}
+inline ::Vector3* L2C_NotifyMove::_internal_mutable_pos() {
+  
+  if (pos_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Vector3>(GetArenaForAllocation());
+    pos_ = p;
+  }
+  return pos_;
+}
+inline ::Vector3* L2C_NotifyMove::mutable_pos() {
+  ::Vector3* _msg = _internal_mutable_pos();
+  // @@protoc_insertion_point(field_mutable:L2C_NotifyMove.pos)
+  return _msg;
+}
+inline void L2C_NotifyMove::set_allocated_pos(::Vector3* pos) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete pos_;
+  }
+  if (pos) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(pos);
+    if (message_arena != submessage_arena) {
+      pos = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, pos, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  pos_ = pos;
+  // @@protoc_insertion_point(field_set_allocated:L2C_NotifyMove.pos)
+}
+
 // -------------------------------------------------------------------
 
 // C2L_StopMove
@@ -2799,9 +4692,943 @@ inline void L2C_NotifyStopMove::set_uid(uint64_t value) {
   // @@protoc_insertion_point(field_set:L2C_NotifyStopMove.uid)
 }
 
+// -------------------------------------------------------------------
+
+// C2L_CreateAccount
+
+// string account = 1;
+inline void C2L_CreateAccount::clear_account() {
+  account_.ClearToEmpty();
+}
+inline const std::string& C2L_CreateAccount::account() const {
+  // @@protoc_insertion_point(field_get:C2L_CreateAccount.account)
+  return _internal_account();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void C2L_CreateAccount::set_account(ArgT0&& arg0, ArgT... args) {
+ 
+ account_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:C2L_CreateAccount.account)
+}
+inline std::string* C2L_CreateAccount::mutable_account() {
+  std::string* _s = _internal_mutable_account();
+  // @@protoc_insertion_point(field_mutable:C2L_CreateAccount.account)
+  return _s;
+}
+inline const std::string& C2L_CreateAccount::_internal_account() const {
+  return account_.Get();
+}
+inline void C2L_CreateAccount::_internal_set_account(const std::string& value) {
+  
+  account_.Set(value, GetArenaForAllocation());
+}
+inline std::string* C2L_CreateAccount::_internal_mutable_account() {
+  
+  return account_.Mutable(GetArenaForAllocation());
+}
+inline std::string* C2L_CreateAccount::release_account() {
+  // @@protoc_insertion_point(field_release:C2L_CreateAccount.account)
+  return account_.Release();
+}
+inline void C2L_CreateAccount::set_allocated_account(std::string* account) {
+  if (account != nullptr) {
+    
+  } else {
+    
+  }
+  account_.SetAllocated(account, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (account_.IsDefault()) {
+    account_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:C2L_CreateAccount.account)
+}
+
+// string password = 2;
+inline void C2L_CreateAccount::clear_password() {
+  password_.ClearToEmpty();
+}
+inline const std::string& C2L_CreateAccount::password() const {
+  // @@protoc_insertion_point(field_get:C2L_CreateAccount.password)
+  return _internal_password();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void C2L_CreateAccount::set_password(ArgT0&& arg0, ArgT... args) {
+ 
+ password_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:C2L_CreateAccount.password)
+}
+inline std::string* C2L_CreateAccount::mutable_password() {
+  std::string* _s = _internal_mutable_password();
+  // @@protoc_insertion_point(field_mutable:C2L_CreateAccount.password)
+  return _s;
+}
+inline const std::string& C2L_CreateAccount::_internal_password() const {
+  return password_.Get();
+}
+inline void C2L_CreateAccount::_internal_set_password(const std::string& value) {
+  
+  password_.Set(value, GetArenaForAllocation());
+}
+inline std::string* C2L_CreateAccount::_internal_mutable_password() {
+  
+  return password_.Mutable(GetArenaForAllocation());
+}
+inline std::string* C2L_CreateAccount::release_password() {
+  // @@protoc_insertion_point(field_release:C2L_CreateAccount.password)
+  return password_.Release();
+}
+inline void C2L_CreateAccount::set_allocated_password(std::string* password) {
+  if (password != nullptr) {
+    
+  } else {
+    
+  }
+  password_.SetAllocated(password, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (password_.IsDefault()) {
+    password_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:C2L_CreateAccount.password)
+}
+
+// -------------------------------------------------------------------
+
+// L2C_CreateAccount
+
+// uint32 ret = 1;
+inline void L2C_CreateAccount::clear_ret() {
+  ret_ = 0u;
+}
+inline uint32_t L2C_CreateAccount::_internal_ret() const {
+  return ret_;
+}
+inline uint32_t L2C_CreateAccount::ret() const {
+  // @@protoc_insertion_point(field_get:L2C_CreateAccount.ret)
+  return _internal_ret();
+}
+inline void L2C_CreateAccount::_internal_set_ret(uint32_t value) {
+  
+  ret_ = value;
+}
+inline void L2C_CreateAccount::set_ret(uint32_t value) {
+  _internal_set_ret(value);
+  // @@protoc_insertion_point(field_set:L2C_CreateAccount.ret)
+}
+
+// string account = 2;
+inline void L2C_CreateAccount::clear_account() {
+  account_.ClearToEmpty();
+}
+inline const std::string& L2C_CreateAccount::account() const {
+  // @@protoc_insertion_point(field_get:L2C_CreateAccount.account)
+  return _internal_account();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void L2C_CreateAccount::set_account(ArgT0&& arg0, ArgT... args) {
+ 
+ account_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:L2C_CreateAccount.account)
+}
+inline std::string* L2C_CreateAccount::mutable_account() {
+  std::string* _s = _internal_mutable_account();
+  // @@protoc_insertion_point(field_mutable:L2C_CreateAccount.account)
+  return _s;
+}
+inline const std::string& L2C_CreateAccount::_internal_account() const {
+  return account_.Get();
+}
+inline void L2C_CreateAccount::_internal_set_account(const std::string& value) {
+  
+  account_.Set(value, GetArenaForAllocation());
+}
+inline std::string* L2C_CreateAccount::_internal_mutable_account() {
+  
+  return account_.Mutable(GetArenaForAllocation());
+}
+inline std::string* L2C_CreateAccount::release_account() {
+  // @@protoc_insertion_point(field_release:L2C_CreateAccount.account)
+  return account_.Release();
+}
+inline void L2C_CreateAccount::set_allocated_account(std::string* account) {
+  if (account != nullptr) {
+    
+  } else {
+    
+  }
+  account_.SetAllocated(account, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (account_.IsDefault()) {
+    account_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:L2C_CreateAccount.account)
+}
+
+// string password = 3;
+inline void L2C_CreateAccount::clear_password() {
+  password_.ClearToEmpty();
+}
+inline const std::string& L2C_CreateAccount::password() const {
+  // @@protoc_insertion_point(field_get:L2C_CreateAccount.password)
+  return _internal_password();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void L2C_CreateAccount::set_password(ArgT0&& arg0, ArgT... args) {
+ 
+ password_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:L2C_CreateAccount.password)
+}
+inline std::string* L2C_CreateAccount::mutable_password() {
+  std::string* _s = _internal_mutable_password();
+  // @@protoc_insertion_point(field_mutable:L2C_CreateAccount.password)
+  return _s;
+}
+inline const std::string& L2C_CreateAccount::_internal_password() const {
+  return password_.Get();
+}
+inline void L2C_CreateAccount::_internal_set_password(const std::string& value) {
+  
+  password_.Set(value, GetArenaForAllocation());
+}
+inline std::string* L2C_CreateAccount::_internal_mutable_password() {
+  
+  return password_.Mutable(GetArenaForAllocation());
+}
+inline std::string* L2C_CreateAccount::release_password() {
+  // @@protoc_insertion_point(field_release:L2C_CreateAccount.password)
+  return password_.Release();
+}
+inline void L2C_CreateAccount::set_allocated_password(std::string* password) {
+  if (password != nullptr) {
+    
+  } else {
+    
+  }
+  password_.SetAllocated(password, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (password_.IsDefault()) {
+    password_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:L2C_CreateAccount.password)
+}
+
+// uint64 uid = 4;
+inline void L2C_CreateAccount::clear_uid() {
+  uid_ = uint64_t{0u};
+}
+inline uint64_t L2C_CreateAccount::_internal_uid() const {
+  return uid_;
+}
+inline uint64_t L2C_CreateAccount::uid() const {
+  // @@protoc_insertion_point(field_get:L2C_CreateAccount.uid)
+  return _internal_uid();
+}
+inline void L2C_CreateAccount::_internal_set_uid(uint64_t value) {
+  
+  uid_ = value;
+}
+inline void L2C_CreateAccount::set_uid(uint64_t value) {
+  _internal_set_uid(value);
+  // @@protoc_insertion_point(field_set:L2C_CreateAccount.uid)
+}
+
+// -------------------------------------------------------------------
+
+// C2L_Login
+
+// string account = 1;
+inline void C2L_Login::clear_account() {
+  account_.ClearToEmpty();
+}
+inline const std::string& C2L_Login::account() const {
+  // @@protoc_insertion_point(field_get:C2L_Login.account)
+  return _internal_account();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void C2L_Login::set_account(ArgT0&& arg0, ArgT... args) {
+ 
+ account_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:C2L_Login.account)
+}
+inline std::string* C2L_Login::mutable_account() {
+  std::string* _s = _internal_mutable_account();
+  // @@protoc_insertion_point(field_mutable:C2L_Login.account)
+  return _s;
+}
+inline const std::string& C2L_Login::_internal_account() const {
+  return account_.Get();
+}
+inline void C2L_Login::_internal_set_account(const std::string& value) {
+  
+  account_.Set(value, GetArenaForAllocation());
+}
+inline std::string* C2L_Login::_internal_mutable_account() {
+  
+  return account_.Mutable(GetArenaForAllocation());
+}
+inline std::string* C2L_Login::release_account() {
+  // @@protoc_insertion_point(field_release:C2L_Login.account)
+  return account_.Release();
+}
+inline void C2L_Login::set_allocated_account(std::string* account) {
+  if (account != nullptr) {
+    
+  } else {
+    
+  }
+  account_.SetAllocated(account, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (account_.IsDefault()) {
+    account_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:C2L_Login.account)
+}
+
+// string password = 2;
+inline void C2L_Login::clear_password() {
+  password_.ClearToEmpty();
+}
+inline const std::string& C2L_Login::password() const {
+  // @@protoc_insertion_point(field_get:C2L_Login.password)
+  return _internal_password();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void C2L_Login::set_password(ArgT0&& arg0, ArgT... args) {
+ 
+ password_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:C2L_Login.password)
+}
+inline std::string* C2L_Login::mutable_password() {
+  std::string* _s = _internal_mutable_password();
+  // @@protoc_insertion_point(field_mutable:C2L_Login.password)
+  return _s;
+}
+inline const std::string& C2L_Login::_internal_password() const {
+  return password_.Get();
+}
+inline void C2L_Login::_internal_set_password(const std::string& value) {
+  
+  password_.Set(value, GetArenaForAllocation());
+}
+inline std::string* C2L_Login::_internal_mutable_password() {
+  
+  return password_.Mutable(GetArenaForAllocation());
+}
+inline std::string* C2L_Login::release_password() {
+  // @@protoc_insertion_point(field_release:C2L_Login.password)
+  return password_.Release();
+}
+inline void C2L_Login::set_allocated_password(std::string* password) {
+  if (password != nullptr) {
+    
+  } else {
+    
+  }
+  password_.SetAllocated(password, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (password_.IsDefault()) {
+    password_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:C2L_Login.password)
+}
+
+// -------------------------------------------------------------------
+
+// L2C_Login
+
+// uint32 ret = 1;
+inline void L2C_Login::clear_ret() {
+  ret_ = 0u;
+}
+inline uint32_t L2C_Login::_internal_ret() const {
+  return ret_;
+}
+inline uint32_t L2C_Login::ret() const {
+  // @@protoc_insertion_point(field_get:L2C_Login.ret)
+  return _internal_ret();
+}
+inline void L2C_Login::_internal_set_ret(uint32_t value) {
+  
+  ret_ = value;
+}
+inline void L2C_Login::set_ret(uint32_t value) {
+  _internal_set_ret(value);
+  // @@protoc_insertion_point(field_set:L2C_Login.ret)
+}
+
+// string account = 2;
+inline void L2C_Login::clear_account() {
+  account_.ClearToEmpty();
+}
+inline const std::string& L2C_Login::account() const {
+  // @@protoc_insertion_point(field_get:L2C_Login.account)
+  return _internal_account();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void L2C_Login::set_account(ArgT0&& arg0, ArgT... args) {
+ 
+ account_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:L2C_Login.account)
+}
+inline std::string* L2C_Login::mutable_account() {
+  std::string* _s = _internal_mutable_account();
+  // @@protoc_insertion_point(field_mutable:L2C_Login.account)
+  return _s;
+}
+inline const std::string& L2C_Login::_internal_account() const {
+  return account_.Get();
+}
+inline void L2C_Login::_internal_set_account(const std::string& value) {
+  
+  account_.Set(value, GetArenaForAllocation());
+}
+inline std::string* L2C_Login::_internal_mutable_account() {
+  
+  return account_.Mutable(GetArenaForAllocation());
+}
+inline std::string* L2C_Login::release_account() {
+  // @@protoc_insertion_point(field_release:L2C_Login.account)
+  return account_.Release();
+}
+inline void L2C_Login::set_allocated_account(std::string* account) {
+  if (account != nullptr) {
+    
+  } else {
+    
+  }
+  account_.SetAllocated(account, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (account_.IsDefault()) {
+    account_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:L2C_Login.account)
+}
+
+// string password = 3;
+inline void L2C_Login::clear_password() {
+  password_.ClearToEmpty();
+}
+inline const std::string& L2C_Login::password() const {
+  // @@protoc_insertion_point(field_get:L2C_Login.password)
+  return _internal_password();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void L2C_Login::set_password(ArgT0&& arg0, ArgT... args) {
+ 
+ password_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:L2C_Login.password)
+}
+inline std::string* L2C_Login::mutable_password() {
+  std::string* _s = _internal_mutable_password();
+  // @@protoc_insertion_point(field_mutable:L2C_Login.password)
+  return _s;
+}
+inline const std::string& L2C_Login::_internal_password() const {
+  return password_.Get();
+}
+inline void L2C_Login::_internal_set_password(const std::string& value) {
+  
+  password_.Set(value, GetArenaForAllocation());
+}
+inline std::string* L2C_Login::_internal_mutable_password() {
+  
+  return password_.Mutable(GetArenaForAllocation());
+}
+inline std::string* L2C_Login::release_password() {
+  // @@protoc_insertion_point(field_release:L2C_Login.password)
+  return password_.Release();
+}
+inline void L2C_Login::set_allocated_password(std::string* password) {
+  if (password != nullptr) {
+    
+  } else {
+    
+  }
+  password_.SetAllocated(password, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (password_.IsDefault()) {
+    password_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:L2C_Login.password)
+}
+
+// uint64 uid = 4;
+inline void L2C_Login::clear_uid() {
+  uid_ = uint64_t{0u};
+}
+inline uint64_t L2C_Login::_internal_uid() const {
+  return uid_;
+}
+inline uint64_t L2C_Login::uid() const {
+  // @@protoc_insertion_point(field_get:L2C_Login.uid)
+  return _internal_uid();
+}
+inline void L2C_Login::_internal_set_uid(uint64_t value) {
+  
+  uid_ = value;
+}
+inline void L2C_Login::set_uid(uint64_t value) {
+  _internal_set_uid(value);
+  // @@protoc_insertion_point(field_set:L2C_Login.uid)
+}
+
+// -------------------------------------------------------------------
+
+// C2L_LeaveWorld
+
+// uint64 uid = 1;
+inline void C2L_LeaveWorld::clear_uid() {
+  uid_ = uint64_t{0u};
+}
+inline uint64_t C2L_LeaveWorld::_internal_uid() const {
+  return uid_;
+}
+inline uint64_t C2L_LeaveWorld::uid() const {
+  // @@protoc_insertion_point(field_get:C2L_LeaveWorld.uid)
+  return _internal_uid();
+}
+inline void C2L_LeaveWorld::_internal_set_uid(uint64_t value) {
+  
+  uid_ = value;
+}
+inline void C2L_LeaveWorld::set_uid(uint64_t value) {
+  _internal_set_uid(value);
+  // @@protoc_insertion_point(field_set:C2L_LeaveWorld.uid)
+}
+
+// -------------------------------------------------------------------
+
+// L2C_LeaveWorld
+
+// uint32 ret = 1;
+inline void L2C_LeaveWorld::clear_ret() {
+  ret_ = 0u;
+}
+inline uint32_t L2C_LeaveWorld::_internal_ret() const {
+  return ret_;
+}
+inline uint32_t L2C_LeaveWorld::ret() const {
+  // @@protoc_insertion_point(field_get:L2C_LeaveWorld.ret)
+  return _internal_ret();
+}
+inline void L2C_LeaveWorld::_internal_set_ret(uint32_t value) {
+  
+  ret_ = value;
+}
+inline void L2C_LeaveWorld::set_ret(uint32_t value) {
+  _internal_set_ret(value);
+  // @@protoc_insertion_point(field_set:L2C_LeaveWorld.ret)
+}
+
+// uint64 uid = 2;
+inline void L2C_LeaveWorld::clear_uid() {
+  uid_ = uint64_t{0u};
+}
+inline uint64_t L2C_LeaveWorld::_internal_uid() const {
+  return uid_;
+}
+inline uint64_t L2C_LeaveWorld::uid() const {
+  // @@protoc_insertion_point(field_get:L2C_LeaveWorld.uid)
+  return _internal_uid();
+}
+inline void L2C_LeaveWorld::_internal_set_uid(uint64_t value) {
+  
+  uid_ = value;
+}
+inline void L2C_LeaveWorld::set_uid(uint64_t value) {
+  _internal_set_uid(value);
+  // @@protoc_insertion_point(field_set:L2C_LeaveWorld.uid)
+}
+
+// -------------------------------------------------------------------
+
+// L2C_NotifyLeaveWorld
+
+// uint32 ret = 1;
+inline void L2C_NotifyLeaveWorld::clear_ret() {
+  ret_ = 0u;
+}
+inline uint32_t L2C_NotifyLeaveWorld::_internal_ret() const {
+  return ret_;
+}
+inline uint32_t L2C_NotifyLeaveWorld::ret() const {
+  // @@protoc_insertion_point(field_get:L2C_NotifyLeaveWorld.ret)
+  return _internal_ret();
+}
+inline void L2C_NotifyLeaveWorld::_internal_set_ret(uint32_t value) {
+  
+  ret_ = value;
+}
+inline void L2C_NotifyLeaveWorld::set_ret(uint32_t value) {
+  _internal_set_ret(value);
+  // @@protoc_insertion_point(field_set:L2C_NotifyLeaveWorld.ret)
+}
+
+// uint64 uid = 2;
+inline void L2C_NotifyLeaveWorld::clear_uid() {
+  uid_ = uint64_t{0u};
+}
+inline uint64_t L2C_NotifyLeaveWorld::_internal_uid() const {
+  return uid_;
+}
+inline uint64_t L2C_NotifyLeaveWorld::uid() const {
+  // @@protoc_insertion_point(field_get:L2C_NotifyLeaveWorld.uid)
+  return _internal_uid();
+}
+inline void L2C_NotifyLeaveWorld::_internal_set_uid(uint64_t value) {
+  
+  uid_ = value;
+}
+inline void L2C_NotifyLeaveWorld::set_uid(uint64_t value) {
+  _internal_set_uid(value);
+  // @@protoc_insertion_point(field_set:L2C_NotifyLeaveWorld.uid)
+}
+
+// -------------------------------------------------------------------
+
+// PlayerState
+
+// uint64 uid = 1;
+inline void PlayerState::clear_uid() {
+  uid_ = uint64_t{0u};
+}
+inline uint64_t PlayerState::_internal_uid() const {
+  return uid_;
+}
+inline uint64_t PlayerState::uid() const {
+  // @@protoc_insertion_point(field_get:PlayerState.uid)
+  return _internal_uid();
+}
+inline void PlayerState::_internal_set_uid(uint64_t value) {
+  
+  uid_ = value;
+}
+inline void PlayerState::set_uid(uint64_t value) {
+  _internal_set_uid(value);
+  // @@protoc_insertion_point(field_set:PlayerState.uid)
+}
+
+// .Vector3 pos = 2;
+inline bool PlayerState::_internal_has_pos() const {
+  return this != internal_default_instance() && pos_ != nullptr;
+}
+inline bool PlayerState::has_pos() const {
+  return _internal_has_pos();
+}
+inline void PlayerState::clear_pos() {
+  if (GetArenaForAllocation() == nullptr && pos_ != nullptr) {
+    delete pos_;
+  }
+  pos_ = nullptr;
+}
+inline const ::Vector3& PlayerState::_internal_pos() const {
+  const ::Vector3* p = pos_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Vector3&>(
+      ::_Vector3_default_instance_);
+}
+inline const ::Vector3& PlayerState::pos() const {
+  // @@protoc_insertion_point(field_get:PlayerState.pos)
+  return _internal_pos();
+}
+inline void PlayerState::unsafe_arena_set_allocated_pos(
+    ::Vector3* pos) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(pos_);
+  }
+  pos_ = pos;
+  if (pos) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:PlayerState.pos)
+}
+inline ::Vector3* PlayerState::release_pos() {
+  
+  ::Vector3* temp = pos_;
+  pos_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::Vector3* PlayerState::unsafe_arena_release_pos() {
+  // @@protoc_insertion_point(field_release:PlayerState.pos)
+  
+  ::Vector3* temp = pos_;
+  pos_ = nullptr;
+  return temp;
+}
+inline ::Vector3* PlayerState::_internal_mutable_pos() {
+  
+  if (pos_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Vector3>(GetArenaForAllocation());
+    pos_ = p;
+  }
+  return pos_;
+}
+inline ::Vector3* PlayerState::mutable_pos() {
+  ::Vector3* _msg = _internal_mutable_pos();
+  // @@protoc_insertion_point(field_mutable:PlayerState.pos)
+  return _msg;
+}
+inline void PlayerState::set_allocated_pos(::Vector3* pos) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete pos_;
+  }
+  if (pos) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(pos);
+    if (message_arena != submessage_arena) {
+      pos = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, pos, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  pos_ = pos;
+  // @@protoc_insertion_point(field_set_allocated:PlayerState.pos)
+}
+
+// .Vector3 direction = 3;
+inline bool PlayerState::_internal_has_direction() const {
+  return this != internal_default_instance() && direction_ != nullptr;
+}
+inline bool PlayerState::has_direction() const {
+  return _internal_has_direction();
+}
+inline void PlayerState::clear_direction() {
+  if (GetArenaForAllocation() == nullptr && direction_ != nullptr) {
+    delete direction_;
+  }
+  direction_ = nullptr;
+}
+inline const ::Vector3& PlayerState::_internal_direction() const {
+  const ::Vector3* p = direction_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Vector3&>(
+      ::_Vector3_default_instance_);
+}
+inline const ::Vector3& PlayerState::direction() const {
+  // @@protoc_insertion_point(field_get:PlayerState.direction)
+  return _internal_direction();
+}
+inline void PlayerState::unsafe_arena_set_allocated_direction(
+    ::Vector3* direction) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(direction_);
+  }
+  direction_ = direction;
+  if (direction) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:PlayerState.direction)
+}
+inline ::Vector3* PlayerState::release_direction() {
+  
+  ::Vector3* temp = direction_;
+  direction_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::Vector3* PlayerState::unsafe_arena_release_direction() {
+  // @@protoc_insertion_point(field_release:PlayerState.direction)
+  
+  ::Vector3* temp = direction_;
+  direction_ = nullptr;
+  return temp;
+}
+inline ::Vector3* PlayerState::_internal_mutable_direction() {
+  
+  if (direction_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Vector3>(GetArenaForAllocation());
+    direction_ = p;
+  }
+  return direction_;
+}
+inline ::Vector3* PlayerState::mutable_direction() {
+  ::Vector3* _msg = _internal_mutable_direction();
+  // @@protoc_insertion_point(field_mutable:PlayerState.direction)
+  return _msg;
+}
+inline void PlayerState::set_allocated_direction(::Vector3* direction) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete direction_;
+  }
+  if (direction) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(direction);
+    if (message_arena != submessage_arena) {
+      direction = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, direction, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  direction_ = direction;
+  // @@protoc_insertion_point(field_set_allocated:PlayerState.direction)
+}
+
+// float speed = 4;
+inline void PlayerState::clear_speed() {
+  speed_ = 0;
+}
+inline float PlayerState::_internal_speed() const {
+  return speed_;
+}
+inline float PlayerState::speed() const {
+  // @@protoc_insertion_point(field_get:PlayerState.speed)
+  return _internal_speed();
+}
+inline void PlayerState::_internal_set_speed(float value) {
+  
+  speed_ = value;
+}
+inline void PlayerState::set_speed(float value) {
+  _internal_set_speed(value);
+  // @@protoc_insertion_point(field_set:PlayerState.speed)
+}
+
+// bool is_move = 5;
+inline void PlayerState::clear_is_move() {
+  is_move_ = false;
+}
+inline bool PlayerState::_internal_is_move() const {
+  return is_move_;
+}
+inline bool PlayerState::is_move() const {
+  // @@protoc_insertion_point(field_get:PlayerState.is_move)
+  return _internal_is_move();
+}
+inline void PlayerState::_internal_set_is_move(bool value) {
+  
+  is_move_ = value;
+}
+inline void PlayerState::set_is_move(bool value) {
+  _internal_set_is_move(value);
+  // @@protoc_insertion_point(field_set:PlayerState.is_move)
+}
+
+// -------------------------------------------------------------------
+
+// L2C_NotifyPlayeStates
+
+// uint32 ret = 1;
+inline void L2C_NotifyPlayeStates::clear_ret() {
+  ret_ = 0u;
+}
+inline uint32_t L2C_NotifyPlayeStates::_internal_ret() const {
+  return ret_;
+}
+inline uint32_t L2C_NotifyPlayeStates::ret() const {
+  // @@protoc_insertion_point(field_get:L2C_NotifyPlayeStates.ret)
+  return _internal_ret();
+}
+inline void L2C_NotifyPlayeStates::_internal_set_ret(uint32_t value) {
+  
+  ret_ = value;
+}
+inline void L2C_NotifyPlayeStates::set_ret(uint32_t value) {
+  _internal_set_ret(value);
+  // @@protoc_insertion_point(field_set:L2C_NotifyPlayeStates.ret)
+}
+
+// repeated .PlayerState player_states = 2;
+inline int L2C_NotifyPlayeStates::_internal_player_states_size() const {
+  return player_states_.size();
+}
+inline int L2C_NotifyPlayeStates::player_states_size() const {
+  return _internal_player_states_size();
+}
+inline void L2C_NotifyPlayeStates::clear_player_states() {
+  player_states_.Clear();
+}
+inline ::PlayerState* L2C_NotifyPlayeStates::mutable_player_states(int index) {
+  // @@protoc_insertion_point(field_mutable:L2C_NotifyPlayeStates.player_states)
+  return player_states_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::PlayerState >*
+L2C_NotifyPlayeStates::mutable_player_states() {
+  // @@protoc_insertion_point(field_mutable_list:L2C_NotifyPlayeStates.player_states)
+  return &player_states_;
+}
+inline const ::PlayerState& L2C_NotifyPlayeStates::_internal_player_states(int index) const {
+  return player_states_.Get(index);
+}
+inline const ::PlayerState& L2C_NotifyPlayeStates::player_states(int index) const {
+  // @@protoc_insertion_point(field_get:L2C_NotifyPlayeStates.player_states)
+  return _internal_player_states(index);
+}
+inline ::PlayerState* L2C_NotifyPlayeStates::_internal_add_player_states() {
+  return player_states_.Add();
+}
+inline ::PlayerState* L2C_NotifyPlayeStates::add_player_states() {
+  ::PlayerState* _add = _internal_add_player_states();
+  // @@protoc_insertion_point(field_add:L2C_NotifyPlayeStates.player_states)
+  return _add;
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::PlayerState >&
+L2C_NotifyPlayeStates::player_states() const {
+  // @@protoc_insertion_point(field_list:L2C_NotifyPlayeStates.player_states)
+  return player_states_;
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

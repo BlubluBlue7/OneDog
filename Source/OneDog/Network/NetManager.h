@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "../Base/Base.h"
+#include "../Data/Data.h"
 #include "SocketInstance.h"
 #include "ServerMonitor.h"
 

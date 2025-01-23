@@ -20,21 +20,24 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character")
 	TSubclassOf<ACharacter> TestCharacterClass;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character")
+	TSubclassOf<APlayerController> TestControllerClass;
+	
 	// 用于存储生成的 BP_TestCharacter 实例
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character")
 	ACharacter* MyCharacter;
 
-	// 用于存储生成的 BP_TestCharacter 实例
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character")
-	ACharacter* EnemyCharacter;
+	TMap<uint64, ACharacter*> EnemyCharacterDict;
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Input")
 	void AddMapping();
 	
 	void Open();
 
-	void AddEnemy();
-	void EnemyMove(FVector Direction, float Speed);
+	void AddEnemy(uint64 UserId, CharacterData* Data);
+	void RemoveEnemy(uint64 UserId);
+	void EnemyMove(uint64 UserId, FVector Direction, float Speed);
+	void EnemyEndMove(uint64 UserId);
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

@@ -3,17 +3,28 @@
 
 #include "OneDog/Protobuf/ProtobufManager.h"
 #include "../Protobuf/cl.pb.h"
+#include "Ctrl/Ctrl.h"
+
 
 void UUI_EntranceBase::Init()
 {
 	netManager = &NetManager::GetInstance();
 
-	serverContent = TEXT("Server");
-	clientContent = TEXT("Client");
 	ServerStateChangeCB serverCB = std::bind(&UUI_EntranceBase::ServerStateChange, this, std::placeholders::_1, std::placeholders::_2);
 	ClientStateChangeCB clientCB = std::bind(&UUI_EntranceBase::ClientStateChange, this, std::placeholders::_1, std::placeholders::_2);
 	netManager->Init(serverCB, clientCB);
 }
+
+void UUI_EntranceBase::ServerStateChange(int state, FString str)
+{
+
+}
+
+void UUI_EntranceBase::ClientStateChange(int state, FString str)
+{
+
+}
+
 
 void UUI_EntranceBase::Close()
 {
@@ -25,105 +36,29 @@ void UUI_EntranceBase::Update()
 	// netManager->Recv();
 }
 
-void UUI_EntranceBase::ServerStateChange(int state, FString str)
+void UUI_EntranceBase::Login()
 {
-	switch (state)
+	FText IDStr = Input_ID->GetText();
+	FText Password = Input_Password->GetText();
+	uint64_t UserId = FCString::Atoi(*IDStr.ToString());
+	if (UserId == 0)
 	{
-	case 0:
-		serverContent += TEXT("开始监听\n");
-		UpdateServerText();
-		break;
-	case 1:
-		serverContent += TEXT("客户端接入！\n");
-		UpdateServerText();
-		break;
-	case 2:
-		serverContent += FString::Printf(TEXT("服务器:%s\n"), *str);
-		UpdateServerText();
-		break;
-	case 3:
-		serverContent += FString::Printf(TEXT("客户端:%s\n"), *str);
-		UpdateServerText();
-		break;
+		return;
 	}
+
+	FString account = IDStr.ToString();
+	FString password = Password.ToString();
+	Ctrl::GetInstance().Login->SendLogin(account, password);
 }
 
-void UUI_EntranceBase::ClientStateChange(int state, FString str)
+void UUI_EntranceBase::Register()
 {
-	switch (state)
-	{
-	case 0:
-		clientContent += TEXT("开始连接\n");
-		UpdateClientText();
-		break;
-	case 1:
-		clientContent += TEXT("连接成功！\n");
-		UpdateClientText();
-		break;
-	case 2:
-		clientContent += FString::Printf(TEXT("客户端:%s\n"), *str);
-		UpdateClientText();
-		break;
-	case 3:
-		clientContent += FString::Printf(TEXT("服务器:%s\n"), *str);
-		UpdateClientText();
-		break;
-	}
+	FText IDStr = Input_ID->GetText();
+	FText Password = Input_Password->GetText();
+	FString account = IDStr.ToString();
+	FString password = Password.ToString();
+	Ctrl::GetInstance().Login->SendCreateAccount(account, password);
 }
 
-void UUI_EntranceBase::ClientBtnClick()
-{
-	std::string Message = ProtobufManager::GetInstance().Encode();
-	// netManager->Socket->Send(Message);
-	// clientInput->SetText(FText::FromString(TEXT("")));
-	// netManager->Server->Recv();
-}
-
-void UUI_EntranceBase::ClientConnectClick()
-{
-	netManager->Socket->Connect();
-}
-
-void UUI_EntranceBase::ServerBtnClick()
-{
-	netManager->Server->Send(serverInput->Text.ToString());
-	serverInput->SetText(FText::FromString(TEXT("")));
-	netManager->Socket->Recv();
-}
-
-void UUI_EntranceBase::ServerListenClick()
-{
-	netManager->Server->StartServer();
-}
-
-void UUI_EntranceBase::UpdateClientText()
-{
-	clientText->SetText(FText::FromString(clientContent));
-}
-
-void UUI_EntranceBase::UpdateServerText()
-{
-	serverText->SetText(FText::FromString(serverContent));
-}
-
-void UUI_EntranceBase::EnterWorld()
-{
-	WorldManager::GetInstance().ChangeLevel(FName("Map_Test"));
-	// C2L_EnterWorld EnterWorld;
-	// EnterWorld.set_uid(1);
-	// Vector3* pos = new Vector3();
-	// pos->set_x(0);
-	// pos->set_y(0);
-	// pos->set_z(0);
-	// EnterWorld.set_allocated_pos(pos);
-	//
-	// // 序列化为二进制
-	// std::string BinaryData;
-	// if (!EnterWorld.SerializeToString(&BinaryData))
-	// {
-	// 	UE_LOG(LogTemp, Error, TEXT("Failed to serialize Player data!"));
-	// }
-	// netManager->Socket->Send(BinaryData, MSG_TYPE::ID_C2L_EnterWorld);
-}
 
 

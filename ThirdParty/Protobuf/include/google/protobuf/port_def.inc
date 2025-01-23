@@ -84,6 +84,11 @@
 
 // Portable fallbacks for C++20 feature test macros:
 // https://en.cppreference.com/w/cpp/feature_test
+#pragma warning(disable: 4125)
+#pragma warning(disable: 4800)
+#pragma warning(disable: 4018)
+#pragma warning(disable: 4506)
+
 #ifndef __has_cpp_attribute
 #define __has_cpp_attribute(x) 0
 #define PROTOBUF_has_cpp_attribute_DEFINED_

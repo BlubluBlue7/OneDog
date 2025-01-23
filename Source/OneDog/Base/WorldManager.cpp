@@ -3,6 +3,10 @@
 #include "Blueprint/UserWidget.h"
 #include "Kismet/GameplayStatics.h"
 
+void WorldManager::Init(UMyGameInstance* Instance)
+{
+	GameInstance = Instance;
+}
 
 void WorldManager::ChangeUI(UUserWidget* UI)
 {
@@ -15,6 +19,22 @@ void WorldManager::ChangeUI(UUserWidget* UI)
 	{
 		UI->AddToViewport();
 	}
+}
+
+void WorldManager::SetRoot(UUI_RootLayer* Layer)
+{
+	RootLayer = Layer;
+	Layer->AddToViewport();
+}
+
+void WorldManager::AddToRoot(UUI_UserWidgetBase* UI)
+{
+	if(RootLayer == nullptr)
+	{
+		return;
+	}
+
+	RootLayer->AddToRoot(UI);
 }
 
 void WorldManager::ChangeLevel(FName Name)
@@ -31,6 +51,7 @@ void WorldManager::Clear()
 
 	CurUI = nullptr;
 	CurLevel = nullptr;
+	GameInstance = nullptr;
 }
 
 

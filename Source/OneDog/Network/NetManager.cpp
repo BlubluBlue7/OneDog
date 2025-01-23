@@ -18,8 +18,11 @@ void NetManager::Init(ServerStateChangeCB serverCB, ClientStateChangeCB clientCB
 
 void NetManager::Close()
 {
-	Server->EndServer();
-	Socket->Close();
+	// Server->EndServer();
+	if(Socket)
+	{
+		Socket->Close();
+	}
 }
 
 void NetManager::Send(std::string Message, MSG_TYPE Type)
@@ -29,24 +32,18 @@ void NetManager::Send(std::string Message, MSG_TYPE Type)
 
 void NetManager::Recv()
 {
-	MSG_TYPE Type = Socket->GetMsg(Buffer);
-	if(Type != ID_NONE)
+	if(not Socket)
 	{
-		switch (Type)
-		{
-		case ID_L2C_EnterWorld:
-			WorldManager::GetInstance().ChangeLevel(FName("Map_Test"));
-			break;
-		case ID_L2C_NotifyEnterWorld:
-			AActor* Actor = WorldManager::GetInstance().BaseActor;
-			ALevel_Test* Test = Cast<ALevel_Test>(Actor);
-			if(Test != nullptr)
-			{
-				Test->AddEnemy();
-			}
-			break;
-		}
+		return;
+	}
+	MSG_TYPE Type = Socket->GetMsg(Buffer);
+	while(Type != ID_NONE)
+	{
+		UE_LOG(LogTemp, Log, TEXT("Recv Type: %d"), Type);
+		TArray<uint8> B = Buffer;
+		WorldManager::GetInstance().GameInstance->M->SendMessage(Type, B);
 		Buffer.Empty();
+		Type = Socket->GetMsg(Buffer);
 		// ProtobufManager::GetInstance().Decode(Buffer);
 	}
 }

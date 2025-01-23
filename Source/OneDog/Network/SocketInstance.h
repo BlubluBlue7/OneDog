@@ -10,7 +10,7 @@ class SocketInstance
 {
 private:
 	TArray<uint8> EncodeMsg(std::string Message, MSG_TYPE Type);
-	MSG_TYPE DecodeMsg(TArray<uint8> Buffer, TArray<uint8> Message);
+	MSG_TYPE DecodeMsg(TArray<uint8>& Buffer, TArray<uint8>& Message);
 public:
 	FSocket* ClientSocket;
 	ClientStateChangeCB stateCB;
@@ -27,5 +27,5 @@ public:
 	void Close();
 	void Recv();
 
-	MSG_TYPE GetMsg(TArray<uint8> Message);
+	MSG_TYPE GetMsg(TArray<uint8>& Message);
 };
