@@ -122,7 +122,7 @@ void ACharacterBase::TickModify()
 		Direction.Normalize();
 		if(Data->isMoving)
 		{
-			AddMovementInput(Direction, FMath::Abs(Data->Speed));
+			// AddMovementInput(Direction, FMath::Abs(Data->Speed));
 		}
 		else
 		{
