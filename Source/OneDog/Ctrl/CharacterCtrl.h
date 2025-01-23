@@ -12,7 +12,7 @@ class ONEDOG_API UCharacterCtrl : public UCtrlBase
 public:
 	void Init() override;
 	void SendMove(FVector Direction, float Speed, FVector pos);
-	void SendStopMove();
+	void SendStopMove(FVector pos);
 
 	void RecvMove(TArray<uint8> Buffer);
 	void RecvStopMove(TArray<uint8> Buffer);

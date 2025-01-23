@@ -22,7 +22,12 @@ void ACharacterBase::BeginPlay()
 	Super::BeginPlay();
 
 	PrimaryActorTick.bCanEverTick = true;
-	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+	UCharacterMovementComponent* CharacterMovement1 = GetCharacterMovement();
+	UE_LOG(LogTemp, Log, TEXT("BrakingDecelerationWalking: %f, GroundFriction: %f, MaxAcceleration: %f"), CharacterMovement1->BrakingDecelerationWalking, CharacterMovement1->GroundFriction, CharacterMovement1->MaxAcceleration);
+	CharacterMovement1->SetMovementMode(EMovementMode::MOVE_Walking);
+	CharacterMovement1->BrakingDecelerationWalking = 40960.0f;  // 增大减速度
+	CharacterMovement1->GroundFriction = 8.0f;  // 增大摩擦力
+	CharacterMovement1->MaxAcceleration = 512.0f;  // 减小加速度
 	// GetOwner()->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
 }
 
@@ -31,6 +36,13 @@ void ACharacterBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	TickModify();
+	if(EndCount > 0)
+	{
+		EndCount--;
+		FVector pos = GetActorLocation();
+		UE_LOG(LogTemp, Log, TEXT("Send Tick Pos: %f, %f, %f, %d"), pos.X, pos.Y, pos.Z, EndCount);
+		Ctrl::GetInstance().Character->SendStopMove(pos);
+	}
 }
 
 // Called to bind functionality to input
@@ -63,29 +75,24 @@ void ACharacterBase::BaseMove(FVector ForwardDirection, float ForwardSpeed, FVec
 		return;
 	}
 	UE_LOG(LogTemp, Log, TEXT("X: %f, Y: %f, Z: %f Speed: %f"), Direction.X, Direction.Y, Direction.Z, Speed);
+	EndCount = 0;
 	lastDirection = Direction;
 	lastSpeed = Speed;
 
-	Ctrl::GetInstance().Character->SendMove(Direction, Speed, GetActorLocation());
+	FVector pos = GetActorLocation();
+	UE_LOG(LogTemp, Log, TEXT("Send Pos: %f, %f, %f"), pos.X, pos.Y, pos.Z);
+	Ctrl::GetInstance().Character->SendMove(Direction, Speed, pos);
 }
 
 void ACharacterBase::BaseMoveEnd()
 {
+	EndCount = 1;
 	lastSpeed = 0;
 	lastDirection.Set(0, 0, 0);
-	C2L_StopMove StopMove;
-	StopMove.set_uid(UserData::GetInstance().GetUserId());
 
-	// 序列化为二进制
-	std::string BinaryData;
-	if (!StopMove.SerializeToString(&BinaryData))
-	{
-		UE_LOG(LogTemp, Error, TEXT("Failed to serialize Player data!"));
-	}
-
-	UE_LOG(LogTemp, Log, TEXT("Stop Move"));
-
-	NetManager::GetInstance().Socket->Send(BinaryData, MSG_TYPE::ID_C2L_StopMove);
+	FVector pos = GetActorLocation();
+	UE_LOG(LogTemp, Log, TEXT("Send Pos: %f, %f, %f"), pos.X, pos.Y, pos.Z);
+	Ctrl::GetInstance().Character->SendStopMove(pos);
 }
 
 void ACharacterBase::SetData(CharacterData* CData)

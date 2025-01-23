@@ -1566,8 +1566,27 @@ class C2L_StopMove final :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kPosFieldNumber = 2,
     kUidFieldNumber = 1,
   };
+  // .Vector3 pos = 2;
+  bool has_pos() const;
+  private:
+  bool _internal_has_pos() const;
+  public:
+  void clear_pos();
+  const ::Vector3& pos() const;
+  PROTOBUF_NODISCARD ::Vector3* release_pos();
+  ::Vector3* mutable_pos();
+  void set_allocated_pos(::Vector3* pos);
+  private:
+  const ::Vector3& _internal_pos() const;
+  ::Vector3* _internal_mutable_pos();
+  public:
+  void unsafe_arena_set_allocated_pos(
+      ::Vector3* pos);
+  ::Vector3* unsafe_arena_release_pos();
+
   // uint64 uid = 1;
   void clear_uid();
   uint64_t uid() const;
@@ -1584,6 +1603,7 @@ class C2L_StopMove final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
+  ::Vector3* pos_;
   uint64_t uid_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_cl_2eproto;
@@ -1709,9 +1729,28 @@ class L2C_StopMove final :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kPosFieldNumber = 3,
     kUidFieldNumber = 2,
     kRetFieldNumber = 1,
   };
+  // .Vector3 pos = 3;
+  bool has_pos() const;
+  private:
+  bool _internal_has_pos() const;
+  public:
+  void clear_pos();
+  const ::Vector3& pos() const;
+  PROTOBUF_NODISCARD ::Vector3* release_pos();
+  ::Vector3* mutable_pos();
+  void set_allocated_pos(::Vector3* pos);
+  private:
+  const ::Vector3& _internal_pos() const;
+  ::Vector3* _internal_mutable_pos();
+  public:
+  void unsafe_arena_set_allocated_pos(
+      ::Vector3* pos);
+  ::Vector3* unsafe_arena_release_pos();
+
   // uint64 uid = 2;
   void clear_uid();
   uint64_t uid() const;
@@ -1737,6 +1776,7 @@ class L2C_StopMove final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
+  ::Vector3* pos_;
   uint64_t uid_;
   uint32_t ret_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -1863,9 +1903,28 @@ class L2C_NotifyStopMove final :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kPosFieldNumber = 3,
     kUidFieldNumber = 2,
     kRetFieldNumber = 1,
   };
+  // .Vector3 pos = 3;
+  bool has_pos() const;
+  private:
+  bool _internal_has_pos() const;
+  public:
+  void clear_pos();
+  const ::Vector3& pos() const;
+  PROTOBUF_NODISCARD ::Vector3* release_pos();
+  ::Vector3* mutable_pos();
+  void set_allocated_pos(::Vector3* pos);
+  private:
+  const ::Vector3& _internal_pos() const;
+  ::Vector3* _internal_mutable_pos();
+  public:
+  void unsafe_arena_set_allocated_pos(
+      ::Vector3* pos);
+  ::Vector3* unsafe_arena_release_pos();
+
   // uint64 uid = 2;
   void clear_uid();
   uint64_t uid() const;
@@ -1891,6 +1950,7 @@ class L2C_NotifyStopMove final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
+  ::Vector3* pos_;
   uint64_t uid_;
   uint32_t ret_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -4604,6 +4664,96 @@ inline void C2L_StopMove::set_uid(uint64_t value) {
   // @@protoc_insertion_point(field_set:C2L_StopMove.uid)
 }
 
+// .Vector3 pos = 2;
+inline bool C2L_StopMove::_internal_has_pos() const {
+  return this != internal_default_instance() && pos_ != nullptr;
+}
+inline bool C2L_StopMove::has_pos() const {
+  return _internal_has_pos();
+}
+inline void C2L_StopMove::clear_pos() {
+  if (GetArenaForAllocation() == nullptr && pos_ != nullptr) {
+    delete pos_;
+  }
+  pos_ = nullptr;
+}
+inline const ::Vector3& C2L_StopMove::_internal_pos() const {
+  const ::Vector3* p = pos_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Vector3&>(
+      ::_Vector3_default_instance_);
+}
+inline const ::Vector3& C2L_StopMove::pos() const {
+  // @@protoc_insertion_point(field_get:C2L_StopMove.pos)
+  return _internal_pos();
+}
+inline void C2L_StopMove::unsafe_arena_set_allocated_pos(
+    ::Vector3* pos) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(pos_);
+  }
+  pos_ = pos;
+  if (pos) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:C2L_StopMove.pos)
+}
+inline ::Vector3* C2L_StopMove::release_pos() {
+  
+  ::Vector3* temp = pos_;
+  pos_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::Vector3* C2L_StopMove::unsafe_arena_release_pos() {
+  // @@protoc_insertion_point(field_release:C2L_StopMove.pos)
+  
+  ::Vector3* temp = pos_;
+  pos_ = nullptr;
+  return temp;
+}
+inline ::Vector3* C2L_StopMove::_internal_mutable_pos() {
+  
+  if (pos_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Vector3>(GetArenaForAllocation());
+    pos_ = p;
+  }
+  return pos_;
+}
+inline ::Vector3* C2L_StopMove::mutable_pos() {
+  ::Vector3* _msg = _internal_mutable_pos();
+  // @@protoc_insertion_point(field_mutable:C2L_StopMove.pos)
+  return _msg;
+}
+inline void C2L_StopMove::set_allocated_pos(::Vector3* pos) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete pos_;
+  }
+  if (pos) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(pos);
+    if (message_arena != submessage_arena) {
+      pos = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, pos, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  pos_ = pos;
+  // @@protoc_insertion_point(field_set_allocated:C2L_StopMove.pos)
+}
+
 // -------------------------------------------------------------------
 
 // L2C_StopMove
@@ -4648,6 +4798,96 @@ inline void L2C_StopMove::set_uid(uint64_t value) {
   // @@protoc_insertion_point(field_set:L2C_StopMove.uid)
 }
 
+// .Vector3 pos = 3;
+inline bool L2C_StopMove::_internal_has_pos() const {
+  return this != internal_default_instance() && pos_ != nullptr;
+}
+inline bool L2C_StopMove::has_pos() const {
+  return _internal_has_pos();
+}
+inline void L2C_StopMove::clear_pos() {
+  if (GetArenaForAllocation() == nullptr && pos_ != nullptr) {
+    delete pos_;
+  }
+  pos_ = nullptr;
+}
+inline const ::Vector3& L2C_StopMove::_internal_pos() const {
+  const ::Vector3* p = pos_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Vector3&>(
+      ::_Vector3_default_instance_);
+}
+inline const ::Vector3& L2C_StopMove::pos() const {
+  // @@protoc_insertion_point(field_get:L2C_StopMove.pos)
+  return _internal_pos();
+}
+inline void L2C_StopMove::unsafe_arena_set_allocated_pos(
+    ::Vector3* pos) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(pos_);
+  }
+  pos_ = pos;
+  if (pos) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:L2C_StopMove.pos)
+}
+inline ::Vector3* L2C_StopMove::release_pos() {
+  
+  ::Vector3* temp = pos_;
+  pos_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::Vector3* L2C_StopMove::unsafe_arena_release_pos() {
+  // @@protoc_insertion_point(field_release:L2C_StopMove.pos)
+  
+  ::Vector3* temp = pos_;
+  pos_ = nullptr;
+  return temp;
+}
+inline ::Vector3* L2C_StopMove::_internal_mutable_pos() {
+  
+  if (pos_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Vector3>(GetArenaForAllocation());
+    pos_ = p;
+  }
+  return pos_;
+}
+inline ::Vector3* L2C_StopMove::mutable_pos() {
+  ::Vector3* _msg = _internal_mutable_pos();
+  // @@protoc_insertion_point(field_mutable:L2C_StopMove.pos)
+  return _msg;
+}
+inline void L2C_StopMove::set_allocated_pos(::Vector3* pos) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete pos_;
+  }
+  if (pos) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(pos);
+    if (message_arena != submessage_arena) {
+      pos = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, pos, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  pos_ = pos;
+  // @@protoc_insertion_point(field_set_allocated:L2C_StopMove.pos)
+}
+
 // -------------------------------------------------------------------
 
 // L2C_NotifyStopMove
@@ -4690,6 +4930,96 @@ inline void L2C_NotifyStopMove::_internal_set_uid(uint64_t value) {
 inline void L2C_NotifyStopMove::set_uid(uint64_t value) {
   _internal_set_uid(value);
   // @@protoc_insertion_point(field_set:L2C_NotifyStopMove.uid)
+}
+
+// .Vector3 pos = 3;
+inline bool L2C_NotifyStopMove::_internal_has_pos() const {
+  return this != internal_default_instance() && pos_ != nullptr;
+}
+inline bool L2C_NotifyStopMove::has_pos() const {
+  return _internal_has_pos();
+}
+inline void L2C_NotifyStopMove::clear_pos() {
+  if (GetArenaForAllocation() == nullptr && pos_ != nullptr) {
+    delete pos_;
+  }
+  pos_ = nullptr;
+}
+inline const ::Vector3& L2C_NotifyStopMove::_internal_pos() const {
+  const ::Vector3* p = pos_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Vector3&>(
+      ::_Vector3_default_instance_);
+}
+inline const ::Vector3& L2C_NotifyStopMove::pos() const {
+  // @@protoc_insertion_point(field_get:L2C_NotifyStopMove.pos)
+  return _internal_pos();
+}
+inline void L2C_NotifyStopMove::unsafe_arena_set_allocated_pos(
+    ::Vector3* pos) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(pos_);
+  }
+  pos_ = pos;
+  if (pos) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:L2C_NotifyStopMove.pos)
+}
+inline ::Vector3* L2C_NotifyStopMove::release_pos() {
+  
+  ::Vector3* temp = pos_;
+  pos_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::Vector3* L2C_NotifyStopMove::unsafe_arena_release_pos() {
+  // @@protoc_insertion_point(field_release:L2C_NotifyStopMove.pos)
+  
+  ::Vector3* temp = pos_;
+  pos_ = nullptr;
+  return temp;
+}
+inline ::Vector3* L2C_NotifyStopMove::_internal_mutable_pos() {
+  
+  if (pos_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Vector3>(GetArenaForAllocation());
+    pos_ = p;
+  }
+  return pos_;
+}
+inline ::Vector3* L2C_NotifyStopMove::mutable_pos() {
+  ::Vector3* _msg = _internal_mutable_pos();
+  // @@protoc_insertion_point(field_mutable:L2C_NotifyStopMove.pos)
+  return _msg;
+}
+inline void L2C_NotifyStopMove::set_allocated_pos(::Vector3* pos) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete pos_;
+  }
+  if (pos) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(pos);
+    if (message_arena != submessage_arena) {
+      pos = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, pos, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  pos_ = pos;
+  // @@protoc_insertion_point(field_set_allocated:L2C_NotifyStopMove.pos)
 }
 
 // -------------------------------------------------------------------

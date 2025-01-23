@@ -124,7 +124,8 @@ struct L2C_NotifyMoveDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 L2C_NotifyMoveDefaultTypeInternal _L2C_NotifyMove_default_instance_;
 PROTOBUF_CONSTEXPR C2L_StopMove::C2L_StopMove(
     ::_pbi::ConstantInitialized)
-  : uid_(uint64_t{0u}){}
+  : pos_(nullptr)
+  , uid_(uint64_t{0u}){}
 struct C2L_StopMoveDefaultTypeInternal {
   PROTOBUF_CONSTEXPR C2L_StopMoveDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -136,7 +137,8 @@ struct C2L_StopMoveDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C2L_StopMoveDefaultTypeInternal _C2L_StopMove_default_instance_;
 PROTOBUF_CONSTEXPR L2C_StopMove::L2C_StopMove(
     ::_pbi::ConstantInitialized)
-  : uid_(uint64_t{0u})
+  : pos_(nullptr)
+  , uid_(uint64_t{0u})
   , ret_(0u){}
 struct L2C_StopMoveDefaultTypeInternal {
   PROTOBUF_CONSTEXPR L2C_StopMoveDefaultTypeInternal()
@@ -149,7 +151,8 @@ struct L2C_StopMoveDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 L2C_StopMoveDefaultTypeInternal _L2C_StopMove_default_instance_;
 PROTOBUF_CONSTEXPR L2C_NotifyStopMove::L2C_NotifyStopMove(
     ::_pbi::ConstantInitialized)
-  : uid_(uint64_t{0u})
+  : pos_(nullptr)
+  , uid_(uint64_t{0u})
   , ret_(0u){}
 struct L2C_NotifyStopMoveDefaultTypeInternal {
   PROTOBUF_CONSTEXPR L2C_NotifyStopMoveDefaultTypeInternal()
@@ -362,6 +365,7 @@ const uint32_t TableStruct_cl_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(proto
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::C2L_StopMove, uid_),
+  PROTOBUF_FIELD_OFFSET(::C2L_StopMove, pos_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::L2C_StopMove, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -370,6 +374,7 @@ const uint32_t TableStruct_cl_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(proto
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::L2C_StopMove, ret_),
   PROTOBUF_FIELD_OFFSET(::L2C_StopMove, uid_),
+  PROTOBUF_FIELD_OFFSET(::L2C_StopMove, pos_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::L2C_NotifyStopMove, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -378,6 +383,7 @@ const uint32_t TableStruct_cl_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(proto
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::L2C_NotifyStopMove, ret_),
   PROTOBUF_FIELD_OFFSET(::L2C_NotifyStopMove, uid_),
+  PROTOBUF_FIELD_OFFSET(::L2C_NotifyStopMove, pos_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::C2L_CreateAccount, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -466,17 +472,17 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 45, -1, -1, sizeof(::L2C_Move)},
   { 56, -1, -1, sizeof(::L2C_NotifyMove)},
   { 67, -1, -1, sizeof(::C2L_StopMove)},
-  { 74, -1, -1, sizeof(::L2C_StopMove)},
-  { 82, -1, -1, sizeof(::L2C_NotifyStopMove)},
-  { 90, -1, -1, sizeof(::C2L_CreateAccount)},
-  { 98, -1, -1, sizeof(::L2C_CreateAccount)},
-  { 108, -1, -1, sizeof(::C2L_Login)},
-  { 116, -1, -1, sizeof(::L2C_Login)},
-  { 126, -1, -1, sizeof(::C2L_LeaveWorld)},
-  { 133, -1, -1, sizeof(::L2C_LeaveWorld)},
-  { 141, -1, -1, sizeof(::L2C_NotifyLeaveWorld)},
-  { 149, -1, -1, sizeof(::PlayerState)},
-  { 160, -1, -1, sizeof(::L2C_NotifyPlayeStates)},
+  { 75, -1, -1, sizeof(::L2C_StopMove)},
+  { 84, -1, -1, sizeof(::L2C_NotifyStopMove)},
+  { 93, -1, -1, sizeof(::C2L_CreateAccount)},
+  { 101, -1, -1, sizeof(::L2C_CreateAccount)},
+  { 111, -1, -1, sizeof(::C2L_Login)},
+  { 119, -1, -1, sizeof(::L2C_Login)},
+  { 129, -1, -1, sizeof(::C2L_LeaveWorld)},
+  { 136, -1, -1, sizeof(::L2C_LeaveWorld)},
+  { 144, -1, -1, sizeof(::L2C_NotifyLeaveWorld)},
+  { 152, -1, -1, sizeof(::PlayerState)},
+  { 163, -1, -1, sizeof(::L2C_NotifyPlayeStates)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -515,39 +521,41 @@ const char descriptor_table_protodef_cl_2eproto[] PROTOBUF_SECTION_VARIABLE(prot
   "Vector3\022\r\n\005speed\030\004 \001(\002\022\025\n\003pos\030\005 \001(\0132\010.Ve"
   "ctor3\"m\n\016L2C_NotifyMove\022\013\n\003ret\030\001 \001(\r\022\013\n\003"
   "uid\030\002 \001(\004\022\033\n\tdirection\030\003 \001(\0132\010.Vector3\022\r"
-  "\n\005speed\030\004 \001(\002\022\025\n\003pos\030\005 \001(\0132\010.Vector3\"\033\n\014"
-  "C2L_StopMove\022\013\n\003uid\030\001 \001(\004\"(\n\014L2C_StopMov"
-  "e\022\013\n\003ret\030\001 \001(\r\022\013\n\003uid\030\002 \001(\004\".\n\022L2C_Notif"
-  "yStopMove\022\013\n\003ret\030\001 \001(\r\022\013\n\003uid\030\002 \001(\004\"6\n\021C"
-  "2L_CreateAccount\022\017\n\007account\030\001 \001(\t\022\020\n\010pas"
-  "sword\030\002 \001(\t\"P\n\021L2C_CreateAccount\022\013\n\003ret\030"
-  "\001 \001(\r\022\017\n\007account\030\002 \001(\t\022\020\n\010password\030\003 \001(\t"
-  "\022\013\n\003uid\030\004 \001(\004\".\n\tC2L_Login\022\017\n\007account\030\001 "
-  "\001(\t\022\020\n\010password\030\002 \001(\t\"H\n\tL2C_Login\022\013\n\003re"
-  "t\030\001 \001(\r\022\017\n\007account\030\002 \001(\t\022\020\n\010password\030\003 \001"
-  "(\t\022\013\n\003uid\030\004 \001(\004\"\035\n\016C2L_LeaveWorld\022\013\n\003uid"
-  "\030\001 \001(\004\"*\n\016L2C_LeaveWorld\022\013\n\003ret\030\001 \001(\r\022\013\n"
-  "\003uid\030\002 \001(\004\"0\n\024L2C_NotifyLeaveWorld\022\013\n\003re"
-  "t\030\001 \001(\r\022\013\n\003uid\030\002 \001(\004\"n\n\013PlayerState\022\013\n\003u"
-  "id\030\001 \001(\004\022\025\n\003pos\030\002 \001(\0132\010.Vector3\022\033\n\tdirec"
-  "tion\030\003 \001(\0132\010.Vector3\022\r\n\005speed\030\004 \001(\002\022\017\n\007i"
-  "s_move\030\005 \001(\010\"I\n\025L2C_NotifyPlayeStates\022\013\n"
-  "\003ret\030\001 \001(\r\022#\n\rplayer_states\030\002 \003(\0132\014.Play"
-  "erState*\241\003\n\010MSG_TYPE\022\013\n\007ID_NONE\020\000\022\025\n\021ID_"
-  "C2L_EnterWorld\020\001\022\025\n\021ID_L2C_EnterWorld\020\002\022"
-  "\033\n\027ID_L2C_NotifyEnterWorld\020\003\022\017\n\013ID_C2L_M"
-  "ove\020\004\022\017\n\013ID_L2C_Move\020\005\022\025\n\021ID_L2C_NotifyM"
-  "ove\020\006\022\023\n\017ID_C2L_StopMove\020\007\022\023\n\017ID_L2C_Sto"
-  "pMove\020\010\022\031\n\025ID_L2C_NotifyStopMove\020\t\022\030\n\024ID"
-  "_C2L_CreateAccount\020\n\022\030\n\024ID_L2C_CreateAcc"
-  "ount\020\013\022\020\n\014ID_C2L_Login\020\014\022\020\n\014ID_L2C_Login"
-  "\020\r\022\025\n\021ID_C2L_LeaveWorld\020\016\022\025\n\021ID_L2C_Leav"
-  "eWorld\020\017\022\033\n\027ID_L2C_NotifyLeaveWorld\020\020\022\034\n"
-  "\030ID_L2C_NotifyPlayeStates\020\021b\006proto3"
+  "\n\005speed\030\004 \001(\002\022\025\n\003pos\030\005 \001(\0132\010.Vector3\"2\n\014"
+  "C2L_StopMove\022\013\n\003uid\030\001 \001(\004\022\025\n\003pos\030\002 \001(\0132\010"
+  ".Vector3\"\?\n\014L2C_StopMove\022\013\n\003ret\030\001 \001(\r\022\013\n"
+  "\003uid\030\002 \001(\004\022\025\n\003pos\030\003 \001(\0132\010.Vector3\"E\n\022L2C"
+  "_NotifyStopMove\022\013\n\003ret\030\001 \001(\r\022\013\n\003uid\030\002 \001("
+  "\004\022\025\n\003pos\030\003 \001(\0132\010.Vector3\"6\n\021C2L_CreateAc"
+  "count\022\017\n\007account\030\001 \001(\t\022\020\n\010password\030\002 \001(\t"
+  "\"P\n\021L2C_CreateAccount\022\013\n\003ret\030\001 \001(\r\022\017\n\007ac"
+  "count\030\002 \001(\t\022\020\n\010password\030\003 \001(\t\022\013\n\003uid\030\004 \001"
+  "(\004\".\n\tC2L_Login\022\017\n\007account\030\001 \001(\t\022\020\n\010pass"
+  "word\030\002 \001(\t\"H\n\tL2C_Login\022\013\n\003ret\030\001 \001(\r\022\017\n\007"
+  "account\030\002 \001(\t\022\020\n\010password\030\003 \001(\t\022\013\n\003uid\030\004"
+  " \001(\004\"\035\n\016C2L_LeaveWorld\022\013\n\003uid\030\001 \001(\004\"*\n\016L"
+  "2C_LeaveWorld\022\013\n\003ret\030\001 \001(\r\022\013\n\003uid\030\002 \001(\004\""
+  "0\n\024L2C_NotifyLeaveWorld\022\013\n\003ret\030\001 \001(\r\022\013\n\003"
+  "uid\030\002 \001(\004\"n\n\013PlayerState\022\013\n\003uid\030\001 \001(\004\022\025\n"
+  "\003pos\030\002 \001(\0132\010.Vector3\022\033\n\tdirection\030\003 \001(\0132"
+  "\010.Vector3\022\r\n\005speed\030\004 \001(\002\022\017\n\007is_move\030\005 \001("
+  "\010\"I\n\025L2C_NotifyPlayeStates\022\013\n\003ret\030\001 \001(\r\022"
+  "#\n\rplayer_states\030\002 \003(\0132\014.PlayerState*\241\003\n"
+  "\010MSG_TYPE\022\013\n\007ID_NONE\020\000\022\025\n\021ID_C2L_EnterWo"
+  "rld\020\001\022\025\n\021ID_L2C_EnterWorld\020\002\022\033\n\027ID_L2C_N"
+  "otifyEnterWorld\020\003\022\017\n\013ID_C2L_Move\020\004\022\017\n\013ID"
+  "_L2C_Move\020\005\022\025\n\021ID_L2C_NotifyMove\020\006\022\023\n\017ID"
+  "_C2L_StopMove\020\007\022\023\n\017ID_L2C_StopMove\020\010\022\031\n\025"
+  "ID_L2C_NotifyStopMove\020\t\022\030\n\024ID_C2L_Create"
+  "Account\020\n\022\030\n\024ID_L2C_CreateAccount\020\013\022\020\n\014I"
+  "D_C2L_Login\020\014\022\020\n\014ID_L2C_Login\020\r\022\025\n\021ID_C2"
+  "L_LeaveWorld\020\016\022\025\n\021ID_L2C_LeaveWorld\020\017\022\033\n"
+  "\027ID_L2C_NotifyLeaveWorld\020\020\022\034\n\030ID_L2C_Not"
+  "ifyPlayeStates\020\021b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_cl_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_cl_2eproto = {
-    false, false, 1675, descriptor_table_protodef_cl_2eproto,
+    false, false, 1744, descriptor_table_protodef_cl_2eproto,
     "cl.proto",
     &descriptor_table_cl_2eproto_once, nullptr, 0, 19,
     schemas, file_default_instances, TableStruct_cl_2eproto::offsets,
@@ -2502,8 +2510,13 @@ void L2C_NotifyMove::InternalSwap(L2C_NotifyMove* other) {
 
 class C2L_StopMove::_Internal {
  public:
+  static const ::Vector3& pos(const C2L_StopMove* msg);
 };
 
+const ::Vector3&
+C2L_StopMove::_Internal::pos(const C2L_StopMove* msg) {
+  return *msg->pos_;
+}
 C2L_StopMove::C2L_StopMove(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
@@ -2513,12 +2526,20 @@ C2L_StopMove::C2L_StopMove(::PROTOBUF_NAMESPACE_ID::Arena* arena,
 C2L_StopMove::C2L_StopMove(const C2L_StopMove& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_pos()) {
+    pos_ = new ::Vector3(*from.pos_);
+  } else {
+    pos_ = nullptr;
+  }
   uid_ = from.uid_;
   // @@protoc_insertion_point(copy_constructor:C2L_StopMove)
 }
 
 inline void C2L_StopMove::SharedCtor() {
-uid_ = uint64_t{0u};
+::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+    reinterpret_cast<char*>(&pos_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&uid_) -
+    reinterpret_cast<char*>(&pos_)) + sizeof(uid_));
 }
 
 C2L_StopMove::~C2L_StopMove() {
@@ -2532,6 +2553,7 @@ C2L_StopMove::~C2L_StopMove() {
 
 inline void C2L_StopMove::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete pos_;
 }
 
 void C2L_StopMove::SetCachedSize(int size) const {
@@ -2544,6 +2566,10 @@ void C2L_StopMove::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  if (GetArenaForAllocation() == nullptr && pos_ != nullptr) {
+    delete pos_;
+  }
+  pos_ = nullptr;
   uid_ = uint64_t{0u};
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
@@ -2558,6 +2584,14 @@ const char* C2L_StopMove::_InternalParse(const char* ptr, ::_pbi::ParseContext* 
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
           uid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .Vector3 pos = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_pos(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -2597,6 +2631,13 @@ uint8_t* C2L_StopMove::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteUInt64ToArray(1, this->_internal_uid(), target);
   }
 
+  // .Vector3 pos = 2;
+  if (this->_internal_has_pos()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(2, _Internal::pos(this),
+        _Internal::pos(this).GetCachedSize(), target, stream);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -2612,6 +2653,13 @@ size_t C2L_StopMove::ByteSizeLong() const {
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
+
+  // .Vector3 pos = 2;
+  if (this->_internal_has_pos()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *pos_);
+  }
 
   // uint64 uid = 1;
   if (this->_internal_uid() != 0) {
@@ -2640,6 +2688,9 @@ void C2L_StopMove::MergeFrom(const C2L_StopMove& from) {
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (from._internal_has_pos()) {
+    _internal_mutable_pos()->::Vector3::MergeFrom(from._internal_pos());
+  }
   if (from._internal_uid() != 0) {
     _internal_set_uid(from._internal_uid());
   }
@@ -2660,7 +2711,12 @@ bool C2L_StopMove::IsInitialized() const {
 void C2L_StopMove::InternalSwap(C2L_StopMove* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  swap(uid_, other->uid_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(C2L_StopMove, uid_)
+      + sizeof(C2L_StopMove::uid_)
+      - PROTOBUF_FIELD_OFFSET(C2L_StopMove, pos_)>(
+          reinterpret_cast<char*>(&pos_),
+          reinterpret_cast<char*>(&other->pos_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata C2L_StopMove::GetMetadata() const {
@@ -2673,8 +2729,13 @@ void C2L_StopMove::InternalSwap(C2L_StopMove* other) {
 
 class L2C_StopMove::_Internal {
  public:
+  static const ::Vector3& pos(const L2C_StopMove* msg);
 };
 
+const ::Vector3&
+L2C_StopMove::_Internal::pos(const L2C_StopMove* msg) {
+  return *msg->pos_;
+}
 L2C_StopMove::L2C_StopMove(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
@@ -2684,6 +2745,11 @@ L2C_StopMove::L2C_StopMove(::PROTOBUF_NAMESPACE_ID::Arena* arena,
 L2C_StopMove::L2C_StopMove(const L2C_StopMove& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_pos()) {
+    pos_ = new ::Vector3(*from.pos_);
+  } else {
+    pos_ = nullptr;
+  }
   ::memcpy(&uid_, &from.uid_,
     static_cast<size_t>(reinterpret_cast<char*>(&ret_) -
     reinterpret_cast<char*>(&uid_)) + sizeof(ret_));
@@ -2692,9 +2758,9 @@ L2C_StopMove::L2C_StopMove(const L2C_StopMove& from)
 
 inline void L2C_StopMove::SharedCtor() {
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&uid_) - reinterpret_cast<char*>(this)),
+    reinterpret_cast<char*>(&pos_) - reinterpret_cast<char*>(this)),
     0, static_cast<size_t>(reinterpret_cast<char*>(&ret_) -
-    reinterpret_cast<char*>(&uid_)) + sizeof(ret_));
+    reinterpret_cast<char*>(&pos_)) + sizeof(ret_));
 }
 
 L2C_StopMove::~L2C_StopMove() {
@@ -2708,6 +2774,7 @@ L2C_StopMove::~L2C_StopMove() {
 
 inline void L2C_StopMove::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete pos_;
 }
 
 void L2C_StopMove::SetCachedSize(int size) const {
@@ -2720,6 +2787,10 @@ void L2C_StopMove::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  if (GetArenaForAllocation() == nullptr && pos_ != nullptr) {
+    delete pos_;
+  }
+  pos_ = nullptr;
   ::memset(&uid_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&ret_) -
       reinterpret_cast<char*>(&uid_)) + sizeof(ret_));
@@ -2744,6 +2815,14 @@ const char* L2C_StopMove::_InternalParse(const char* ptr, ::_pbi::ParseContext* 
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
           uid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .Vector3 pos = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          ptr = ctx->ParseMessage(_internal_mutable_pos(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -2789,6 +2868,13 @@ uint8_t* L2C_StopMove::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteUInt64ToArray(2, this->_internal_uid(), target);
   }
 
+  // .Vector3 pos = 3;
+  if (this->_internal_has_pos()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(3, _Internal::pos(this),
+        _Internal::pos(this).GetCachedSize(), target, stream);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -2804,6 +2890,13 @@ size_t L2C_StopMove::ByteSizeLong() const {
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
+
+  // .Vector3 pos = 3;
+  if (this->_internal_has_pos()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *pos_);
+  }
 
   // uint64 uid = 2;
   if (this->_internal_uid() != 0) {
@@ -2837,6 +2930,9 @@ void L2C_StopMove::MergeFrom(const L2C_StopMove& from) {
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (from._internal_has_pos()) {
+    _internal_mutable_pos()->::Vector3::MergeFrom(from._internal_pos());
+  }
   if (from._internal_uid() != 0) {
     _internal_set_uid(from._internal_uid());
   }
@@ -2863,9 +2959,9 @@ void L2C_StopMove::InternalSwap(L2C_StopMove* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(L2C_StopMove, ret_)
       + sizeof(L2C_StopMove::ret_)
-      - PROTOBUF_FIELD_OFFSET(L2C_StopMove, uid_)>(
-          reinterpret_cast<char*>(&uid_),
-          reinterpret_cast<char*>(&other->uid_));
+      - PROTOBUF_FIELD_OFFSET(L2C_StopMove, pos_)>(
+          reinterpret_cast<char*>(&pos_),
+          reinterpret_cast<char*>(&other->pos_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata L2C_StopMove::GetMetadata() const {
@@ -2878,8 +2974,13 @@ void L2C_StopMove::InternalSwap(L2C_StopMove* other) {
 
 class L2C_NotifyStopMove::_Internal {
  public:
+  static const ::Vector3& pos(const L2C_NotifyStopMove* msg);
 };
 
+const ::Vector3&
+L2C_NotifyStopMove::_Internal::pos(const L2C_NotifyStopMove* msg) {
+  return *msg->pos_;
+}
 L2C_NotifyStopMove::L2C_NotifyStopMove(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
@@ -2889,6 +2990,11 @@ L2C_NotifyStopMove::L2C_NotifyStopMove(::PROTOBUF_NAMESPACE_ID::Arena* arena,
 L2C_NotifyStopMove::L2C_NotifyStopMove(const L2C_NotifyStopMove& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_pos()) {
+    pos_ = new ::Vector3(*from.pos_);
+  } else {
+    pos_ = nullptr;
+  }
   ::memcpy(&uid_, &from.uid_,
     static_cast<size_t>(reinterpret_cast<char*>(&ret_) -
     reinterpret_cast<char*>(&uid_)) + sizeof(ret_));
@@ -2897,9 +3003,9 @@ L2C_NotifyStopMove::L2C_NotifyStopMove(const L2C_NotifyStopMove& from)
 
 inline void L2C_NotifyStopMove::SharedCtor() {
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&uid_) - reinterpret_cast<char*>(this)),
+    reinterpret_cast<char*>(&pos_) - reinterpret_cast<char*>(this)),
     0, static_cast<size_t>(reinterpret_cast<char*>(&ret_) -
-    reinterpret_cast<char*>(&uid_)) + sizeof(ret_));
+    reinterpret_cast<char*>(&pos_)) + sizeof(ret_));
 }
 
 L2C_NotifyStopMove::~L2C_NotifyStopMove() {
@@ -2913,6 +3019,7 @@ L2C_NotifyStopMove::~L2C_NotifyStopMove() {
 
 inline void L2C_NotifyStopMove::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete pos_;
 }
 
 void L2C_NotifyStopMove::SetCachedSize(int size) const {
@@ -2925,6 +3032,10 @@ void L2C_NotifyStopMove::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  if (GetArenaForAllocation() == nullptr && pos_ != nullptr) {
+    delete pos_;
+  }
+  pos_ = nullptr;
   ::memset(&uid_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&ret_) -
       reinterpret_cast<char*>(&uid_)) + sizeof(ret_));
@@ -2949,6 +3060,14 @@ const char* L2C_NotifyStopMove::_InternalParse(const char* ptr, ::_pbi::ParseCon
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
           uid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .Vector3 pos = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          ptr = ctx->ParseMessage(_internal_mutable_pos(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -2994,6 +3113,13 @@ uint8_t* L2C_NotifyStopMove::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteUInt64ToArray(2, this->_internal_uid(), target);
   }
 
+  // .Vector3 pos = 3;
+  if (this->_internal_has_pos()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(3, _Internal::pos(this),
+        _Internal::pos(this).GetCachedSize(), target, stream);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -3009,6 +3135,13 @@ size_t L2C_NotifyStopMove::ByteSizeLong() const {
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
+
+  // .Vector3 pos = 3;
+  if (this->_internal_has_pos()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *pos_);
+  }
 
   // uint64 uid = 2;
   if (this->_internal_uid() != 0) {
@@ -3042,6 +3175,9 @@ void L2C_NotifyStopMove::MergeFrom(const L2C_NotifyStopMove& from) {
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (from._internal_has_pos()) {
+    _internal_mutable_pos()->::Vector3::MergeFrom(from._internal_pos());
+  }
   if (from._internal_uid() != 0) {
     _internal_set_uid(from._internal_uid());
   }
@@ -3068,9 +3204,9 @@ void L2C_NotifyStopMove::InternalSwap(L2C_NotifyStopMove* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(L2C_NotifyStopMove, ret_)
       + sizeof(L2C_NotifyStopMove::ret_)
-      - PROTOBUF_FIELD_OFFSET(L2C_NotifyStopMove, uid_)>(
-          reinterpret_cast<char*>(&uid_),
-          reinterpret_cast<char*>(&other->uid_));
+      - PROTOBUF_FIELD_OFFSET(L2C_NotifyStopMove, pos_)>(
+          reinterpret_cast<char*>(&pos_),
+          reinterpret_cast<char*>(&other->pos_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata L2C_NotifyStopMove::GetMetadata() const {

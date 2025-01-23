@@ -18,6 +18,7 @@ public:
 	
 	FVector lastDirection;
 	float lastSpeed = 0;
+	int EndCount = 0;
 
 protected:
 	// Called when the game starts or when spawned

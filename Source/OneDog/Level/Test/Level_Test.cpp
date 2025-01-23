@@ -103,7 +103,7 @@ void ALevel_Test::EnemyEndMove(uint64 UserId)
 	}
 
 	CharacterData* Data = UserData::GetInstance().GetCharacterData(UserId);
-	if(!Data)
+	if(!Data || !Data->isMoving)
 	{
 		return;
 	}

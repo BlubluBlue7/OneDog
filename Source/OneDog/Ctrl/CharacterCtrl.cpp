@@ -57,9 +57,23 @@ void UCharacterCtrl::SendMove(FVector Direction, float Speed, FVector pos)
 	NetManager::GetInstance().Socket->Send(BinaryData, MSG_TYPE::ID_C2L_Move);
 }
 
-void UCharacterCtrl::SendStopMove()
+void UCharacterCtrl::SendStopMove(FVector pos)
 {
+	C2L_StopMove StopMove;
+	StopMove.set_uid(UserData::GetInstance().GetUserId());
+	Vector3* ProtoPos = StopMove.mutable_pos();
+	ProtoPos->set_x(pos.X);
+	ProtoPos->set_y(pos.Y);
+	ProtoPos->set_z(pos.Z);
+	// 序列化为二进制
+	std::string BinaryData;
+	if (!StopMove.SerializeToString(&BinaryData))
+	{
+		UE_LOG(LogTemp, Error, TEXT("Failed to serialize Player data!"));
+	}
 	
+	UE_LOG(LogTemp, Log, TEXT("Send End Pos: %f, %f, %f"), pos.X, pos.Y, pos.Z);
+	NetManager::GetInstance().Socket->Send(BinaryData, MSG_TYPE::ID_C2L_StopMove);
 }
 
 void UCharacterCtrl::RecvMove(TArray<uint8> Buffer)
@@ -122,6 +136,8 @@ void UCharacterCtrl::RecvNotifyPlayerStates(TArray<uint8> Buffer)
 	{
 		PlayerState state = NotifyPlayerStates.player_states(i);
 		int64 UserId = state.uid();
+		Vector3 ProtoPos = state.pos();
+		UE_LOG(LogTemp, Log, TEXT("ProtoPos: %f, %f, %f"), ProtoPos.x(), ProtoPos.y(), ProtoPos.z());
 		if(UserId == 0)
 		{
 			UE_LOG(LogTemp, Error, TEXT("UserId is 0"));
@@ -132,7 +148,6 @@ void UCharacterCtrl::RecvNotifyPlayerStates(TArray<uint8> Buffer)
 			Data->AddEnemy(UserId);
 		}
 
-		Vector3 ProtoPos = state.pos();
 		FVector Pos(ProtoPos.x(), ProtoPos.y(), ProtoPos.z());
 		Data->UpdateEnemyPos(UserId, Pos);
 	}
