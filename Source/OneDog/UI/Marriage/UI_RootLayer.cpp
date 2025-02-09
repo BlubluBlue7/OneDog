@@ -96,9 +96,18 @@ void UUI_RootLayer::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	FVector2D ViewportSize;
-	GEngine->GameViewport->GetViewportSize(ViewportSize);
+	// 延迟 0.1 秒后获取视口尺寸
+	FTimerHandle TimerHandle;
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, [this]()
+	{
+		FVector2D ViewportSize;
+		if (GEngine && GEngine->GameViewport)
+		{
+			GEngine->GameViewport->GetViewportSize(ViewportSize);
+			Text_Height->SetText(FText::FromString(FString::Printf(TEXT("高%f"), ViewportSize.Y)));
+Text_Width->SetText(FText::FromString(FString::Printf(TEXT("宽%f"), ViewportSize.X)));
+			UE_LOG(LogTemp, Log, TEXT("Viewport Size: %f x %f"), ViewportSize.X, ViewportSize.Y);
+		}
+	}, 0.1f, false); // 0.1 秒后执行
 
-	Text_Height->SetText(FText::FromString(FString::Printf(TEXT("高%f"), ViewportSize.Y)));
-	Text_Width->SetText(FText::FromString(FString::Printf(TEXT("宽%f"), ViewportSize.X)));
 }
