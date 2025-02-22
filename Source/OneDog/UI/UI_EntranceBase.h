@@ -42,4 +42,7 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = "UI_Entrance")
 	void Register();
+
+	UFUNCTION(BlueprintCallable, Category = "UI_Entrance")
+	void EnterWorld();
 };

@@ -10,7 +10,7 @@ void SocketInstance::AsyncConnect()
 {
 	AsyncTask(ENamedThreads::AnyBackgroundThreadNormalTask, [this]()
 	{
-		Connect();
+		//Connect();
 	});
 }
 bool SocketInstance::Connect()
@@ -34,7 +34,7 @@ bool SocketInstance::Connect()
 	}
 	// 设置服务器地址和端口
 	FIPv4Address IPAddress;
-	FIPv4Address::Parse(TEXT("120.55.165.7"), IPAddress); // 使用本地回环地址
+	FIPv4Address::Parse(TEXT("172.19.8.244"), IPAddress); // 使用本地回环地址
 	TSharedRef<FInternetAddr> Addr = SocketSubsystem->CreateInternetAddr();
 	Addr->SetIp(IPAddress.Value);
 	Addr->SetPort(12345); // 设置端口号

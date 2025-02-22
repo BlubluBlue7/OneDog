@@ -54,7 +54,7 @@ void UWorldCtrl::SendLeaveWorld(uint64 UserID)
 	{
 		UE_LOG(LogTemp, Error, TEXT("Failed to serialize Player data!"));
 	}
-	NetManager::GetInstance().Socket->Send(BinaryData, MSG_TYPE::ID_C2L_LeaveWorld);
+	//NetManager::GetInstance().Socket->Send(BinaryData, MSG_TYPE::ID_C2L_LeaveWorld);
 }
 
 void UWorldCtrl::RecvEnterWorld(TArray<uint8> Buffer)

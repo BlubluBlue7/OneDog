@@ -17,11 +17,11 @@ public class OneDog : ModuleRules
 		PublicDefinitions.Add("GOOGLE_PROTOBUF_NO_RTTI");
 		PublicDefinitions.Add("_CRT_SECURE_NO_WARNINGS");
 		
-		PublicIncludePaths.Add("D:\\Study\\Project\\UE5\\OneDog\\ThirdParty\\Protobuf\\include");
+		PublicIncludePaths.Add("D:\\project\\onedog\\ThirdParty\\Protobuf\\include");
 		PublicIncludePaths.Add(ModuleDirectory);
-		PrivateIncludePaths.Add("D:\\Study\\Project\\UE5\\OneDog\\ThirdParty\\Protobuf\\include");
-		PublicSystemIncludePaths.Add("D:\\Study\\Project\\UE5\\OneDog\\ThirdParty\\Protobuf\\include");
-		PublicAdditionalLibraries.Add("D:\\Study\\Project\\UE5\\OneDog\\ThirdParty\\Protobuf\\lib\\libprotobuf.lib");
+		PrivateIncludePaths.Add("D:\\project\\onedog\\ThirdParty\\Protobuf\\include");
+		PublicSystemIncludePaths.Add("D:\\project\\onedog\\ThirdParty\\Protobuf\\include");
+		PublicAdditionalLibraries.Add("D:\\project\\onedog\\ThirdParty\\Protobuf\\lib\\libprotobuf.lib");
 		// PublicAdditionalLibraries.Add("D:\\Study\\Project\\UE5\\OneDog\\ThirdParty\\Protobuf\\lib\\libprotobuf-lite.lib");
 		// PublicAdditionalLibraries.Add("D:\\Study\\Project\\UE5\\OneDog\\ThirdParty\\Protobuf\\lib\\libprotoc.lib");
 

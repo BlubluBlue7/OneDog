@@ -18,17 +18,17 @@ void ALevel_Test::BeginPlay()
 {
 	Super::BeginPlay();
 
-	FVector SpawnLocation(100, 0, 0); // 根据需要调整
-	FRotator SpawnRotation(0, 0, 0); // 根据需要调整
-	AActor* actor = GetWorld()->SpawnActor(TestCharacterClass, &SpawnLocation, &SpawnRotation);
-	MyCharacter = Cast<ACharacter>(actor);
-
-
-	
-	GetWorld()->GetFirstPlayerController()->Possess(MyCharacter);
-
-	AddMapping();
-	WorldManager::GetInstance().BaseActor = this;
+	// FVector SpawnLocation(100, 0, 0); // 根据需要调整
+	// FRotator SpawnRotation(0, 0, 0); // 根据需要调整
+	// AActor* actor = GetWorld()->SpawnActor(TestCharacterClass, &SpawnLocation, &SpawnRotation);
+	// MyCharacter = Cast<ACharacter>(actor);
+	//
+	//
+	//
+	// GetWorld()->GetFirstPlayerController()->Possess(MyCharacter);
+	//
+	// AddMapping();
+	// WorldManager::GetInstance().BaseActor = this;
 }
 
 void ALevel_Test::AddEnemy(uint64 UserId, CharacterData* Data)

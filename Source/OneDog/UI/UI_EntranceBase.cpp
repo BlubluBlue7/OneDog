@@ -61,4 +61,9 @@ void UUI_EntranceBase::Register()
 }
 
 
+void UUI_EntranceBase::EnterWorld()
+{
+	WorldManager::GetInstance().ChangeLevel(FName("Map_Test"));
+
+}
 
